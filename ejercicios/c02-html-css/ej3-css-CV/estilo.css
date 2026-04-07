@@ -1,0 +1,30 @@
+li {
+    color:rgb(255, 0, 0);
+    font-family: fantasy;
+
+}
+
+h1 {
+    padding:2%;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.vueltaIndice{
+
+    background-color:cadetblue;
+    margin:2%; 
+
+}
+
+img{
+
+    border:1px solid sandybrown;
+    width: 300px;
+    height: 150px;
+}
+
+.indice{
+    margin:10%;
+    background-color: blueviolet;
+    padding: 10%;
+}
