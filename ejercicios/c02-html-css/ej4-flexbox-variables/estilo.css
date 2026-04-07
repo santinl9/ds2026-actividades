@@ -1,0 +1,51 @@
+:root{
+    --colorListas:rgba(184, 83, 83, 0.871);
+    --redonditud:10px;
+    --sombras: 0 30px 30px rgb(101, 163, 167);
+}
+
+*{
+    box-sizing: border-box;
+}
+
+li {
+    color:var(--colorListas);
+    font-family: fantasy;
+    flex-grow: 1;
+    box-shadow: var(--sombras);
+
+}
+
+h1 {
+    padding:2%;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    box-shadow: var(--sombras);
+}
+
+.vueltaIndice{
+
+    background-color:cadetblue;
+    margin:2%; 
+    border-radius: var(--redonditud);
+
+}
+
+img{
+
+    border:1px solid sandybrown;
+    width: 300px;
+    height: 150px;
+}
+
+.indice{
+    margin:10%;
+    background-color: blueviolet;
+    padding: 10%;
+    border-radius: var(--redonditud);
+}
+
+.listaHobbies{
+    display:flex;
+    width: 300px;
+}
+
