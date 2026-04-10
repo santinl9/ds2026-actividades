@@ -1,0 +1,129 @@
+:root{
+    --colorListas:rgba(184, 83, 83, 0.871);
+    --redonditud:10px;
+    --sombras: 0 30px 30px rgb(101, 163, 167);
+}
+
+*{
+    box-sizing: border-box;
+}
+
+li {
+    color:var(--colorListas);
+    font-family: fantasy;
+    flex-grow: 1;
+    box-shadow: var(--sombras);
+
+}
+
+h1 {
+    padding:2%;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    box-shadow: var(--sombras);
+}
+
+.vueltaIndice{
+
+    background-color:cadetblue;
+    margin:2%; 
+    border-radius: var(--redonditud);
+
+}
+
+img{
+
+    border:1px solid sandybrown;
+    width: 300px;
+    height: 150px;
+}
+
+.indice{
+    margin:10%;
+    background-color: blueviolet;
+    padding: 10%;
+    border-radius: var(--redonditud);
+}
+
+.indice li a{
+    color: white;
+}
+
+.indice h1{
+    color: white;
+    background-image: url("https://media4.giphy.com/media/v1.Y2lkPTZjMDliOTUyd3l1dzlwN3VsbnFxanhjZWxzazE2enYyaXB4cmo2YnY2Nmppdnc1YyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/xUA7aQ21bruxszHmRW/200.gif");
+    background-size: cover;
+    background-position: center;
+}
+
+#contacto{
+    margin-left: 60% ;
+}
+.listaHobbies{
+    display:flex;
+    width: 300px;
+}
+
+form{
+    display:flex;
+    flex-direction: column;
+    background-color: chartreuse;
+    margin: 20%;
+    margin-top: 5%;
+    border-radius: var(--redonditud);
+    box-shadow: var(--sombras);
+}
+
+#enviar{
+    color: violet;
+    background-color: blue;   
+}
+
+#enviar:hover{
+    background-image: url("https://usagif.com/wp-content/uploads/gifs/fire-51.gif");
+    background-size: cover;
+    height: 80px;
+}
+
+@media (max-width: 431px) {
+    .vueltaIndice{
+        text-size-adjust: 150%;
+
+    }
+    #bodyIndice{
+        background-color: blueviolet;
+    }
+    
+    #bodyIndice h1{
+        background-color: white;
+    }
+    #bodyIndice li{
+        background-color: wheat;
+        text-size-adjust: 200%;
+    }
+    #contacto{
+        margin-left: 0;
+    }
+
+    #formContacto *{
+        text-size-adjust: 200%;
+    }
+
+    #bodyEstudios p{
+        text-size-adjust: 200%;
+
+    }
+
+    img{
+        width: 100%;
+        height: 110%;
+    }
+
+    .listaHobbies{
+        display: flex;
+        flex-direction: column;
+    }
+    .listaHobbies li{
+        text-size-adjust: 200%;
+    }
+
+}
