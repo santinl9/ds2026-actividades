@@ -31,7 +31,7 @@ const diaDeLaSemana = (numero) => {
 }
 
 let numero= numeroRandom(1,10);
-//let numeroRandom =Math.floor(Math.random() * 10) + 1;
+
 console.log(`el alumno se sacó un ${numero}, está ${clasificarNota(numero)}`);
 console.log(`el día de la semana número ${numero} es ${diaDeLaSemana(numero)}`);
 console.log("f5 para generar otro número random");
