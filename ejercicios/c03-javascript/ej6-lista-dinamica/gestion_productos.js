@@ -1,4 +1,4 @@
-const cargar_producto=(nombre)=>{
+const crear_producto=(nombre)=>{
     
     const boton_eliminar = document.createElement('button');
     boton_eliminar.id = 'eliminar_producto';
@@ -25,7 +25,7 @@ const lista_productos = document.querySelector('#lista_productos');
 boton_carga.addEventListener('click',()=>{
 
     const nombre_prodcuto = document.querySelector('#nombre_producto').value;
-    const producto = cargar_producto(nombre_prodcuto);
+    const producto = crear_producto(nombre_prodcuto);
     lista_productos.appendChild(producto);
     
 });
