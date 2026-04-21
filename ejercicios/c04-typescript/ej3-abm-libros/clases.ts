@@ -49,7 +49,7 @@ export class Catalogo{
         return new Catalogo();
     }
 
-    cargarLibro(libro: Libro): void{
+    cargarLibro(libro: Libro ): void{
         this.libros.push(libro);
     }
     eliminarLibro(isbn: string): void{

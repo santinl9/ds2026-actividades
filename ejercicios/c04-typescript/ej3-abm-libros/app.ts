@@ -73,51 +73,57 @@ const cambiarDisponibilidad = ( Libro : Libro) : void => {
     renderizar(catalogo.verLibros());
 }
 
-const validarFormulario = (): boolean => {
+const validarFormulario = (): Libro | null => {
 
-    let formularioValido = true;
+    let titulo = (document.querySelector('#titulo') as HTMLInputElement).value;
+    let autor =(document.querySelector('#autor') as HTMLInputElement).value;
+    let precio = (document.querySelector('#precio') as HTMLInputElement).value;
+
+    if (titulo == '' || autor == '' || precio == '' || Number(precio) < 0){
+        return null;
+    }
+    else {
+        let isbm = `AUTO-${Date.now().toString().slice(-6)}`;
+        let libro = Libro.crearLibro(isbm,titulo,autor,Number(precio));
+        
+        return libro;
+    }
+
+}
+
+const mostrarError = (): void => {
+
     let lista = document.createElement('ul') as HTMLUListElement;
     
-    if ((document.querySelector('#isbn') as HTMLInputElement).value == ''){
-        let item = document.createElement('li') as HTMLLIElement;
-        item.innerHTML = 'El campo ISBN no puede estar vacío';
-        lista.appendChild(item);
-        formularioValido = false;
-    }
     if ((document.querySelector('#titulo') as HTMLInputElement).value == ''){  
         let item = document.createElement('li') as HTMLLIElement;
         item.innerHTML = 'El campo Título no puede estar vacío';
         lista.appendChild(item);
-        formularioValido = false;
-    
+
     }
     if ((document.querySelector('#autor') as HTMLInputElement).value == ''){
         let item = document.createElement('li') as HTMLLIElement;
         item.innerHTML = 'El campo Autor no puede estar vacío';
         lista.appendChild(item);
-        formularioValido = false;
     }
     if ((document.querySelector('#precio') as HTMLInputElement).value == ''){
         let item = document.createElement('li') as HTMLLIElement;
         item.innerHTML = 'El campo Precio no puede estar vacío';
         lista.appendChild(item);
-        formularioValido = false;
     }
     else if (Number((document.querySelector('#precio') as HTMLInputElement).value) < 0){
         let item = document.createElement('li') as HTMLLIElement;
         item.innerHTML = 'El campo Precio no puede ser negativo';
         lista.appendChild(item);
-        formularioValido = false;
     }
 
     formulario.innerHTML = 'Error(es) de formulario:'; //esto hace que el formulario se pise por errores consecutivos
     formulario.appendChild(lista);
 
-    return formularioValido;
 }
 
+
 const vaciarCampos = (): void => {
-    (document.querySelector('#isbn') as HTMLInputElement).value = '';
     (document.querySelector('#titulo') as HTMLInputElement).value = '';
     (document.querySelector('#autor') as HTMLInputElement).value = '';
     (document.querySelector('#precio') as HTMLInputElement).value = '';
@@ -136,19 +142,15 @@ const formulario = document.querySelector('#errorForm') as HTMLFormElement;
 
 botonLibro.addEventListener('click', () => {
 
-    if (validarFormulario()){
-        let libro = Libro.crearLibro(
-            (document.querySelector('#isbn') as HTMLInputElement).value,
-            (document.querySelector('#titulo') as HTMLInputElement).value,
-            (document.querySelector('#autor') as HTMLInputElement).value,
-            Number((document.querySelector('#precio') as HTMLInputElement).value)
-        );
+    let libro = validarFormulario();
+    if (libro !== null){
         agregarLibro(libro);
         vaciarCampos();
-    }   
-    else{
-        alert('formulario inválido');
     }
+    else{
+        mostrarError();
+    }
+  
 });
 
 botonAutor.addEventListener('click', () => {

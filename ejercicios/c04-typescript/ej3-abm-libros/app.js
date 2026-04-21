@@ -49,44 +49,44 @@ const cambiarDisponibilidad = (Libro) => {
     renderizar(catalogo.verLibros());
 };
 const validarFormulario = () => {
-    let formularioValido = true;
-    let lista = document.createElement('ul');
-    if (document.querySelector('#isbn').value == '') {
-        let item = document.createElement('li');
-        item.innerHTML = 'El campo ISBN no puede estar vacío';
-        lista.appendChild(item);
-        formularioValido = false;
+    let titulo = document.querySelector('#titulo').value;
+    let autor = document.querySelector('#autor').value;
+    let precio = document.querySelector('#precio').value;
+    if (titulo == '' || autor == '' || precio == '' || Number(precio) < 0) {
+        return null;
     }
+    else {
+        let isbm = `AUTO-${Date.now().toString().slice(-6)}`;
+        let libro = Libro.crearLibro(isbm, titulo, autor, Number(precio));
+        return libro;
+    }
+};
+const mostrarError = () => {
+    let lista = document.createElement('ul');
     if (document.querySelector('#titulo').value == '') {
         let item = document.createElement('li');
         item.innerHTML = 'El campo Título no puede estar vacío';
         lista.appendChild(item);
-        formularioValido = false;
     }
     if (document.querySelector('#autor').value == '') {
         let item = document.createElement('li');
         item.innerHTML = 'El campo Autor no puede estar vacío';
         lista.appendChild(item);
-        formularioValido = false;
     }
     if (document.querySelector('#precio').value == '') {
         let item = document.createElement('li');
         item.innerHTML = 'El campo Precio no puede estar vacío';
         lista.appendChild(item);
-        formularioValido = false;
     }
     else if (Number(document.querySelector('#precio').value) < 0) {
         let item = document.createElement('li');
         item.innerHTML = 'El campo Precio no puede ser negativo';
         lista.appendChild(item);
-        formularioValido = false;
     }
     formulario.innerHTML = 'Error(es) de formulario:'; //esto hace que el formulario se pise por errores consecutivos
     formulario.appendChild(lista);
-    return formularioValido;
 };
 const vaciarCampos = () => {
-    document.querySelector('#isbn').value = '';
     document.querySelector('#titulo').value = '';
     document.querySelector('#autor').value = '';
     document.querySelector('#precio').value = '';
@@ -101,13 +101,13 @@ const listaLibros = document.querySelector('#lista');
 const stats = document.querySelector('#stats');
 const formulario = document.querySelector('#errorForm');
 botonLibro.addEventListener('click', () => {
-    if (validarFormulario()) {
-        let libro = Libro.crearLibro(document.querySelector('#isbn').value, document.querySelector('#titulo').value, document.querySelector('#autor').value, Number(document.querySelector('#precio').value));
+    let libro = validarFormulario();
+    if (libro !== null) {
         agregarLibro(libro);
         vaciarCampos();
     }
     else {
-        alert('formulario inválido');
+        mostrarError();
     }
 });
 botonAutor.addEventListener('click', () => {
