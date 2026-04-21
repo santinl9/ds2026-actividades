@@ -1,4 +1,4 @@
-const boton = document.querySelector('#arboton') as HTMLElement;
+const boton = document.querySelector('#arboton') as HTMLButtonElement;
 
 const alturaValida =(altura :number ): boolean =>{
 
@@ -28,14 +28,18 @@ const generarArbol=(altura : number): string =>{
 
 boton.addEventListener('click',()=>{
     const div = document.querySelector('#div') as HTMLElement;
-    const altura = Number(document.querySelector('#altura').value);
+    const altura = Number((document.querySelector('#altura') as HTMLInputElement).value);
     //const arbol = document.createElement('p');
     //arbol.innerHTML = generarArbol(altura);
     if (alturaValida(altura)){
-        document.querySelector('#arbol').innerHTML = generarArbol(altura);
+        (document.querySelector('#arbol') as HTMLElement).innerHTML = generarArbol(altura);
     }
     else{
         alert("altura inválida");
     }
     //div.appendChild(arbol);
 });
+
+export {};
+
+// https://developer.mozilla.org/es/docs/Web/API/HTML_DOM_API#html_element_interfaces

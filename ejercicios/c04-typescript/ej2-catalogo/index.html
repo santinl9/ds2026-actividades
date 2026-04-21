@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+    <div>
+        <div>
+            <h1>Carga de libros</h1>
+            <input type="text" id ="isbn" placeholder="isbn del libro">
+            <input type="text" id ="nombre" placeholder="nombre del libro">
+            <input type="text" id ="autor" placeholder="autor del libro">
+            <input type="number" id ="precio" placeholder="precio del libro">
+            <button id ="cargaLibro">Cargar Libro</button>
+        </div>
+        <h1>Catálogo</h1>
+        <input type="text" id="filtroAutor" placeholder="nombre de autor">
+        <button id ="filtrar">Filtrar por autor</button>
+        <button id="mostrarDisponibles">Solo disponibles</button>
+        <button id="mostrarTodos">Ver todos</button>
+        <p id="stats"></p>
+        <ul id="lista"></ul>
+    </div> 
+    
+    <script type="module" src="app.js"></script>
+</body>
+</html>
