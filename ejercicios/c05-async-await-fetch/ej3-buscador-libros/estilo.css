@@ -1,0 +1,9 @@
+
+#resultados{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#resultados > div{
+    width: 25%;
+}
