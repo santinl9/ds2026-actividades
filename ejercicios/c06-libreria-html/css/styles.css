@@ -1,0 +1,29 @@
+:root{
+    --blancos:antiquewhite;
+    --negros:#1a1a1a;;
+}
+
+body{
+    background-image: url("../Old_Summoner27s_Rift_Shop.jpg");
+    background-size: cover;
+    background-color: var(--negros);
+    color: var(--blancos);
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+#titulo{
+    height: 250px;
+    background-image: url("../Mejai27s_Soulstealer_old.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    -webkit-text-stroke: 2px var(--negros);
+}
+.navbar, .navbar-brand, .nav-link {
+    background-color: var(--negros) !important;
+    color: var(--blancos) !important;
+}
+
+.card, .card-body {
+    background-color:var(--negros) !important;
+    color: var(--blancos) !important;
+}

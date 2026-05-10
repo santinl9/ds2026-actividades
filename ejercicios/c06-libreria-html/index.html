@@ -5,14 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/styles.css" media="screen">
 </head>
-<body>
+<body id="indice">
 
     <!--------------------------------------------------------------NAV BAR------------------------------------------------------------------->
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary ">
         <div class="container-fluid">
             <a class="navbar-brand" href="index.html">
-                <img src="Mejai27s_Soulstealer_old (1).jpg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+                <img src="Mejai27s_Soulstealer_old (1).png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
                 FeedMejai
             </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,7 +29,87 @@
         </div>
       </nav>
     
+    <!--------------------------------------------------------------NAV BAR------------------------------------------------------------------->
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <div class="container text-center" id="titulo">
+        <h1>Bienvenido!</h1>
+        <h2>Librería FeedMejai</h2>
+    </div>
+
+    <div class="d-grid gap-2">
+      <a href="catalogo.html" class="btn btn-outline-danger">Visitar Catálogo</a>
+    </div>
+
+    <!--------------------------------------------------------------CARDS------------------------------------------------------------------->
+
+    <div class="container" id="librosTendencia">
+      <h1>Libros mejor valorados</h1>
+      <div class="row">
+        <div class="col-md-2">
+          <div class="card" id="libro1">
+            <img src="" class="card-img-top">
+            <div class="card-body">
+              <h5 class="card-title"></h5>
+              <p class="card-text"></p>
+              <a href="libro.html" class="btn btn-outline-danger">Ver más</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="card" id="libro2">
+            <img src="" class="card-img-top">
+            <div class="card-body">
+              <h5 class="card-title"></h5>
+              <p class="card-text"></p>
+              <a href="libro.html" class="btn btn-outline-danger">Ver más</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="card" id="libro3">
+            <img src="" class="card-img-top">
+            <div class="card-body">
+              <h5 class="card-title"></h5>
+              <p class="card-text"></p>
+              <a href="libro.html" class="btn btn-outline-danger">Ver más</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="card" id="libro4">
+            <img src="" class="card-img-top">
+            <div class="card-body">
+              <h5 class="card-title"></h5>
+              <p class="card-text"></p>
+              <a href="libro.html" class="btn btn-outline-danger">Ver más</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="card" id="libro5">
+            <img src="" class="card-img-top">
+            <div class="card-body">
+              <h5 class="card-title"></h5>
+              <p class="card-text"></p>
+              <a href="libro.html" class="btn btn-outline-danger">Ver más</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="card" id="libro6">
+            <img src="" class="card-img-top">
+            <div class="card-body">
+              <h5 class="card-title"></h5>
+              <p class="card-text"></p>
+              <a href="libro.html" class="btn btn-outline-danger">Ver más</a>
+            </div>
+          </div>
+        </div>
+    </div>
+  <!--------------------------------------------------------------CARDS------------------------------------------------------------------->
+
+
+  <script type="module" src="js/data.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
 </html>
