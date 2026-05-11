@@ -39,7 +39,7 @@ async function libroDescripcion(key:string): Promise<string> {
 
         const salidaJSON = await salida.json();
 
-        const desripcion : string = salidaJSON.description === "string"?salidaJSON.description : salidaJSON.description.value;
+        const desripcion : string = (typeof salidaJSON.description === "string")?salidaJSON.description : salidaJSON.description.value;
         return desripcion;
 
     }
@@ -151,7 +151,6 @@ document.addEventListener("DOMContentLoaded", async() => {
                 libroEncontrado = librosTendencia[indice-1];
 
                 sessionStorage.setItem("libroEncontrado", JSON.stringify(libroEncontrado));
-                window.location.href = "libro.html";
 
             }
 
@@ -227,6 +226,21 @@ document.addEventListener("DOMContentLoaded", async() => {
             }
 
         })
+    }
+
+    if (window.location.pathname.includes("contacto.html")) {
+        const form = document.querySelector("#formContacto") as HTMLFormElement;
+    
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();
+            if (!form.checkValidity()) {
+                form.classList.add("was-validated");
+                return;
+            }
+            alert("Mensaje enviado correctamente.");
+            form.reset();
+            form.classList.remove("was-validated");
+        });
     }
 })
 

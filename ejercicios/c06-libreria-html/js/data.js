@@ -20,7 +20,7 @@ async function libroDescripcion(key) {
             throw new Error(`Error en la solicitud ${salida.status}`);
         }
         const salidaJSON = await salida.json();
-        const desripcion = salidaJSON.description === "string" ? salidaJSON.description : salidaJSON.description.value;
+        const desripcion = (typeof salidaJSON.description === "string") ? salidaJSON.description : salidaJSON.description.value;
         return desripcion;
     }
     catch (error) {
@@ -91,7 +91,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                 const indice = Number(event.target.closest('[id*="libro"]').id.slice(-1));
                 libroEncontrado = librosTendencia[indice - 1];
                 sessionStorage.setItem("libroEncontrado", JSON.stringify(libroEncontrado));
-                window.location.href = "libro.html";
             }
         });
     }
@@ -141,6 +140,19 @@ document.addEventListener("DOMContentLoaded", async () => {
                 sessionStorage.setItem("libroEncontrado", JSON.stringify(libroEncontrado));
                 window.location.href = "libro.html";
             }
+        });
+    }
+    if (window.location.pathname.includes("contacto.html")) {
+        const form = document.querySelector("#formContacto");
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();
+            if (!form.checkValidity()) {
+                form.classList.add("was-validated");
+                return;
+            }
+            alert("Mensaje enviado correctamente.");
+            form.reset();
+            form.classList.remove("was-validated");
         });
     }
 });

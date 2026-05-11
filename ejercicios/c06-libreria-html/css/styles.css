@@ -6,6 +6,7 @@
 body{
     background-image: url("../Old_Summoner27s_Rift_Shop.jpg");
     background-size: cover;
+    background-repeat: no-repeat;
     background-color: var(--negros);
     color: var(--blancos);
     font-family: Georgia, 'Times New Roman', Times, serif;
@@ -18,13 +19,8 @@ body{
     background-repeat: no-repeat;
     -webkit-text-stroke: 2px var(--negros);
 }
-.navbar, .navbar-brand, .nav-link {
+.navbar, .navbar-brand, .nav-link, .card, .card-body{
     background-color: var(--negros) !important;
-    color: var(--blancos) !important;
-}
-
-.card, .card-body {
-    background-color:var(--negros) !important;
     color: var(--blancos) !important;
 }
 
@@ -34,4 +30,34 @@ body{
 
 #portada{
     margin-left: 25%;
+}
+
+.form-control, .form-select {
+    
+    background-color: var(--negros) !important;
+    color: var(--blancos) !important;
+    border-color: var(--blancos);
+}
+
+.form-label {
+    -webkit-text-stroke: 0.5px var(--negros);
+    color: var(--blancos);
+}
+
+.navbar-toggler-icon{
+
+    filter: invert(1);
+}
+
+@media (max-width: 420px) {
+    body{
+        background-image: none;
+    }
+}
+
+@media (max-width: 860){
+
+    body{
+        background-position: right;
+    }
 }
