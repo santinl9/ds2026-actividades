@@ -29,7 +29,7 @@ async function libroDescripcion(key) {
 }
 async function buscarLibro(nombre) {
     try {
-        const salida = await fetch(`https://openlibrary.org/search.json?q=${nombre}`);
+        const salida = await fetch(`https://openlibrary.org/search.json?q=${nombre}&fields=title,author_name,cover_i,key`);
         if (!salida.ok) {
             throw new Error(`Error en la solicitud ${salida.status}`);
         }
@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             if (event.target.closest(".btn")) {
                 const indice = Number(event.target.closest('[id*="libro"]').id.slice(-1));
                 libroEncontrado = librosTendencia[indice - 1];
-                sessionStorage.setItem("libroEncontrado", JSON.stringify(libroEncontrado));
+                sessionStorage.setItem("libroEncontrado", JSON.stringify(libroEncontrado)); //pasar por la URL es mejor
             }
         });
     }
@@ -103,14 +103,36 @@ document.addEventListener("DOMContentLoaded", async () => {
         document.querySelector("#precio").innerHTML = `$${(Math.random() * 5000).toFixed(2).toString()}`;
     }
     if (window.location.pathname.includes("catalogo.html")) {
+        const libro = JSON.parse(sessionStorage.getItem("libroEncontrado"));
+        const resultados = document.querySelector('#resultados');
+        const formulario = document.querySelector('#buscador');
+        let libros;
         const cargando = () => {
             const p = document.createElement('p');
             p.innerHTML = 'Cargando...';
             return p;
         };
-        const resultados = document.querySelector('#resultados');
-        const formulario = document.querySelector('#buscador');
-        let libros;
+        if (libro) {
+            resultados.innerHTML = '';
+            const titulo = libro.title;
+            const resultadosPara = document.createElement("h2");
+            resultados.innerHTML = `Resultados para:"${titulo}"`;
+            resultados.appendChild(resultadosPara);
+            const cargandoHTML = cargando();
+            resultados.appendChild(cargandoHTML);
+            libros = await buscarLibro(titulo);
+            let i = 0;
+            libros.slice(0, 10).forEach(libro => {
+                resultados.appendChild(libroHTML(libro, i));
+                i++;
+            });
+            cargandoHTML.style.display = 'none';
+        }
+        else {
+            const h1 = document.createElement('h1');
+            h1.innerHTML = "Habría que buscar algo...";
+            resultados.appendChild(h1);
+        }
         formulario.addEventListener('submit', async (event) => {
             event.preventDefault();
             resultados.innerHTML = '';
@@ -138,7 +160,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                 const indice = Number(event.target.closest('[id*="libro"]').id.slice(-1));
                 libroEncontrado = libros[indice - 1];
                 sessionStorage.setItem("libroEncontrado", JSON.stringify(libroEncontrado));
-                window.location.href = "libro.html";
             }
         });
     }

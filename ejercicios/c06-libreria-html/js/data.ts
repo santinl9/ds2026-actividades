@@ -53,7 +53,7 @@ async function libroDescripcion(key:string): Promise<string> {
 async function buscarLibro(nombre: string): Promise<Libro[]> {
 
     try {
-        const salida = await fetch(`https://openlibrary.org/search.json?q=${nombre}`); 
+        const salida = await fetch(`https://openlibrary.org/search.json?q=${nombre}&fields=title,author_name,cover_i,key`); 
 
         if (!salida.ok){
             throw new Error(`Error en la solicitud ${salida.status}`);
@@ -150,7 +150,7 @@ document.addEventListener("DOMContentLoaded", async() => {
                 const indice =  Number(((event.target as Element).closest('[id*="libro"]') as Element).id.slice(-1));
                 libroEncontrado = librosTendencia[indice-1];
 
-                sessionStorage.setItem("libroEncontrado", JSON.stringify(libroEncontrado));
+                sessionStorage.setItem("libroEncontrado", JSON.stringify(libroEncontrado)); //pasar por la URL es mejor
 
             }
 
@@ -158,6 +158,7 @@ document.addEventListener("DOMContentLoaded", async() => {
     }
 
     if (window.location.pathname.includes("libro.html")) {
+
         const libro: Libro = JSON.parse(sessionStorage.getItem("libroEncontrado")!);
 
         (document.querySelector("#portada") as HTMLImageElement).src=`https://covers.openlibrary.org/b/id/${libro.cover_i}-L.jpg`;
@@ -165,9 +166,16 @@ document.addEventListener("DOMContentLoaded", async() => {
         (document.querySelector("#autor") as HTMLHeadingElement).innerHTML = libro.author_name? `autor: ${libro.author_name}` : 'autor no disponible';
         (document.querySelector("#descripcion") as HTMLParagraphElement).innerHTML =`descripción:\n${await libroDescripcion(libro.key)}`;
         (document.querySelector("#precio") as HTMLParagraphElement).innerHTML =`$${(Math.random() * 5000).toFixed(2).toString()}` ;
+
     }
 
     if (window.location.pathname.includes("catalogo.html")){
+
+        const libro: Libro = JSON.parse(sessionStorage.getItem("libroEncontrado")!);
+
+        const resultados = document.querySelector('#resultados') as HTMLDivElement;
+        const formulario = document.querySelector('#buscador') as HTMLButtonElement;
+        let libros :Libro[];
 
         const cargando =(): HTMLParagraphElement => {
             const p = document.createElement('p');
@@ -175,10 +183,37 @@ document.addEventListener("DOMContentLoaded", async() => {
             return p;
         }
         
-        const resultados = document.querySelector('#resultados') as HTMLDivElement;
-        const formulario = document.querySelector('#buscador') as HTMLButtonElement;
-        let libros :Libro[];
+        if (libro){
+
+            resultados.innerHTML='';
+            
+            const titulo = libro.title;
+
+                const resultadosPara = document.createElement("h2");
+                resultados.innerHTML=`Resultados para:"${titulo}"`;
+            
+                resultados.appendChild(resultadosPara);
+
+                const cargandoHTML = cargando();
+                resultados.appendChild(cargandoHTML);
+            
+                libros = await buscarLibro(titulo);
+                let i=0;
+                libros.slice(0,10).forEach(libro => {
+
+                    resultados.appendChild(libroHTML(libro,i));
+                    i++;
         
+                })
+                cargandoHTML.style.display = 'none';
+            }
+        else{
+
+                const h1 = (document.createElement('h1') as HTMLHeadingElement);
+                h1.innerHTML = "Habría que buscar algo...";
+                resultados.appendChild(h1);
+        }
+
         formulario.addEventListener('submit', async (event) => {
 
             event.preventDefault();
@@ -221,7 +256,6 @@ document.addEventListener("DOMContentLoaded", async() => {
                 libroEncontrado = libros[indice-1];
 
                 sessionStorage.setItem("libroEncontrado", JSON.stringify(libroEncontrado));
-                window.location.href = "libro.html";
 
             }
 
