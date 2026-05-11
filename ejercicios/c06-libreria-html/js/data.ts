@@ -38,17 +38,83 @@ async function libroDescripcion(key:string): Promise<string> {
         }
 
         const salidaJSON = await salida.json();
-    
-        const desripcion : string = salidaJSON.description;
+
+        const desripcion : string = salidaJSON.description === "string"?salidaJSON.description : salidaJSON.description.value;
         return desripcion;
 
     }
 
     catch (error){
-        alert(`Error al obtener desripcion: ${error}`)
 
-        return "";
+        return "Descripcion no disponible";
     }
+}
+
+async function buscarLibro(nombre: string): Promise<Libro[]> {
+
+    try {
+        const salida = await fetch(`https://openlibrary.org/search.json?q=${nombre}`); 
+
+        if (!salida.ok){
+            throw new Error(`Error en la solicitud ${salida.status}`);
+        }
+
+        const salidaJSON = await salida.json();
+        
+        const libros : Libro[] = salidaJSON.docs;
+        return libros;
+
+    }
+
+    catch (error){
+
+        alert( `Error al obtener los usuarios: ${error}`);
+
+        return [];
+
+    }
+}
+
+const libroHTML = (libro:Libro,i:number ): HTMLDivElement =>{
+
+    const card = document.createElement('div');
+    card.className="card";
+    card.id=`libro${i+1}`;
+
+    const portada = document.createElement('img');
+    portada.className="card-img-top";
+    portada.src= `https://covers.openlibrary.org/b/id/${libro.cover_i}-M.jpg`;
+
+    const body =document.createElement('div');
+    body.className="card-body"
+
+    const titulo = document.createElement('h5');
+    titulo.className="card-title"
+    titulo.innerHTML=`${libro.title}`
+
+    const autor =document.createElement('p');
+    autor.className="card-text";
+    autor.innerHTML=libro.author_name?`autor:${libro.author_name}`:"autor no disponible";
+
+    const boton =document.createElement('a');
+    boton.href="libro.html";
+    boton.className="btn btn-outline-danger"
+    boton.innerHTML="Ver más"
+
+    card.appendChild(portada);
+
+    body.appendChild(titulo);
+    body.appendChild(autor);
+    body.appendChild(boton);
+    
+    card.appendChild(body)
+
+    const columna = document.createElement('div');
+    columna.className="col-md-2";
+    
+    columna.appendChild(card);
+    
+    return columna;
 }
 
 let libroEncontrado: Libro;
@@ -101,9 +167,68 @@ document.addEventListener("DOMContentLoaded", async() => {
         (document.querySelector("#descripcion") as HTMLParagraphElement).innerHTML =`descripción:\n${await libroDescripcion(libro.key)}`;
         (document.querySelector("#precio") as HTMLParagraphElement).innerHTML =`$${(Math.random() * 5000).toFixed(2).toString()}` ;
     }
-});
 
+    if (window.location.pathname.includes("catalogo.html")){
 
+        const cargando =(): HTMLParagraphElement => {
+            const p = document.createElement('p');
+            p.innerHTML = 'Cargando...';
+            return p;
+        }
+        
+        const resultados = document.querySelector('#resultados') as HTMLDivElement;
+        const formulario = document.querySelector('#buscador') as HTMLButtonElement;
+        let libros :Libro[];
+        
+        formulario.addEventListener('submit', async (event) => {
+
+            event.preventDefault();
+            resultados.innerHTML='';
+        
+            const titulo = (document.querySelector('#tituloLibro') as HTMLInputElement).value;
+
+            if (titulo != ''){
+
+                const resultadosPara = document.createElement("h2");
+                resultados.innerHTML=`Resultados para:"${titulo}"`;
+            
+                resultados.appendChild(resultadosPara);
+
+                const cargandoHTML = cargando();
+                resultados.appendChild(cargandoHTML);
+            
+                libros = await buscarLibro(titulo);
+                let i=0;
+                libros.slice(0,10).forEach(libro => {
+
+                    resultados.appendChild(libroHTML(libro,i));
+                    i++;
+        
+                })
+                cargandoHTML.style.display = 'none';
+        
+            }
+            else {
+                alert('Por favor, ingresa un título para buscar.');
+            }
+        
+        })
+
+        resultados.addEventListener("click", (event) =>{
+
+            if((event.target as Element ).closest(".btn")){
+
+                const indice =  Number(((event.target as Element).closest('[id*="libro"]') as Element).id.slice(-1));
+                libroEncontrado = libros[indice-1];
+
+                sessionStorage.setItem("libroEncontrado", JSON.stringify(libroEncontrado));
+                window.location.href = "libro.html";
+
+            }
+
+        })
+    }
+})
 
 
 

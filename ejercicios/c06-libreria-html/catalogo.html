@@ -30,7 +30,26 @@
         </div>
       </nav>
 
+ <!--------------------------------------------------------------NAV BAR------------------------------------------------------------------->
+      <div class="container text-center">
 
+        <nav class="navbar bg-body-tertiary">
+          <div class="container-fluid">
+            <a class="navbar-brand">Busca tu libro</a>
+            <form class="d-flex" role="search" id="buscador">
+              <input class="form-control me-2" type="search" placeholder="ingrese el Título" aria-label="Search" id="tituloLibro"/>
+              <button class="btn btn-outline-danger" type="submit">Buscar</button>
+            </form>
+          </div>
+        </nav>
+        <div class="row" id="resultados">
+
+        </div>
+
+      </div>
+
+
+      <script type="module" src="js/data.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
 </html>
