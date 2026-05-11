@@ -27,3 +27,11 @@ body{
     background-color:var(--negros) !important;
     color: var(--blancos) !important;
 }
+
+#acerca_de{
+    background-color: var(--negros) !important;
+}
+
+#portada{
+    margin-left: 25%;
+}
