@@ -1,41 +1,22 @@
 import './App.css';
-import {useState} from 'react';
-import {Navbar } from './components/layout/Navbar.tsx';
-import {Indice } from './pages/Indice.tsx';
-import {Librotsx } from './pages/Libro.tsx';
-import type { Libro } from './types/Libro.ts';
+import { Routes, Route } from 'react-router-dom';
+import Layout from './components/layout/Layout.tsx' //con export default va sin llaves
+import Indice from './pages/Indice.tsx';
+import LibroDetalle from './pages/LibroDetalle.tsx';
 
-export type PaginaProps ={
-  pagina: number;
-  setPagina: React.Dispatch<React.SetStateAction<number>>;
+
+function App(){
+
+    return (
+        <>
+            <Layout>
+                <Routes>
+                    <Route path='/Libro/:cover_i/:title/:author_name/:key' element={<LibroDetalle/>}/>
+                    <Route path='/' element={<Indice/>}/>
+                </Routes>
+            </Layout>
+        </>
+    )
 }
 
-export function App(){
-
-  const [pagina, setPagina] = useState<number>(1);
-  const [libro, setLibro] = useState<Libro | undefined>();
-
-  return(
-    <>
-    <Navbar 
-      pagina={pagina} 
-      setPagina={setPagina}>
-    </Navbar>
-    {
-    (pagina==1
-    && <Indice
-          setLibro={setLibro}
-          setPagina={setPagina}>
-      </Indice>
-    )
-    ||
-    (pagina==4
-    && <Librotsx
-          libro={libro}
-          setPagina={setPagina}>
-      </Librotsx>
-    )
-    }
-    </>
-  )
-}
+export default App

@@ -22,12 +22,12 @@
     background-color: var(--negros);
 }
 
-#navbar{
+.header-footer{
     background-color: var(--negros);
     color: var(--blancos);
 }
 
-button{
+button, .boton{
     border-color: #DC3545;
     border-style: solid;
     border-width: 2px;

@@ -1,23 +1,25 @@
 import '../App.css';
 import {useState, useEffect} from 'react';
-import type { Libro } from '../types/Libro.ts';
+import { useParams } from 'react-router-dom';
 
-type LibroProps={
-    libro: Libro;
-    setPagina: React.Dispatch<React.SetStateAction<number>>;
-}
+function LibroDetalle(){
 
-export function Librotsx({libro, setPagina}: LibroProps){
-
-    const[descripcion, setDescripcion] = useState<string>();
     const[cargando, setCargando] = useState<boolean>(false);
+    const[descripcion, setDescripcion] = useState<string>();
+
+    const {cover_i, title, author_name, key}= useParams<{
+        cover_i: string;
+        title: string;
+        author_name?: string;
+        key:string
+    }>()
 
     useEffect(()=>{
 
         async function libroDescripcion(key:string): Promise<string> {
 
             try {
-                const salida = await fetch(`https://openlibrary.org${key}.json`); 
+                const salida = await fetch(`https://openlibrary.org/works/${key}.json`); 
         
                 if (!salida.ok){
                     throw new Error(`Error en la solicitud ${salida.status}`);
@@ -40,7 +42,7 @@ export function Librotsx({libro, setPagina}: LibroProps){
         }
 
         setCargando(true);
-        libroDescripcion(libro.key);
+        libroDescripcion(key);
 
     },[])
 
@@ -48,21 +50,23 @@ export function Librotsx({libro, setPagina}: LibroProps){
         <>
         <div className='cuerpo' id="acerca_de">
             <div className="flex flex-row justify-evenly flex-wrap">
-                <img src={`https://covers.openlibrary.org/b/id/${libro.cover_i}-M.jpg`} className='w-[300px]'></img>
+                <img src={`https://covers.openlibrary.org/b/id/${cover_i}-M.jpg`} className='w-[300px]'></img>
                 <div className="flex flex-col items-center max-w-[600px]"> 
-                    <h1>{libro.title}</h1>
-                    <p>{libro.author_name?.join(",")??"autor no disponible"}</p>
+                    <h1>{title}</h1>
+                    <p>{author_name??"autor no disponible"}</p>
                     <p>{cargando?"cargando...": descripcion}</p>
                 </div>
             </div>
             <div className='flex flex-row justify-center flex-wrap gap-3'>
                 <p>${(Math.random() * 5000).toFixed(2).toString()}</p>
                 <button className='w-screen'>Comprar</button>
-                <button onClick={()=>setPagina(2)}>Ir al catálogo</button>
+                <button>Ir al catálogo</button>
             </div>
         </div>
         </>
     )
 
 
-}
+};
+
+export default LibroDetalle;

@@ -1,12 +1,12 @@
+import '../App.css'
 import type { Libro } from '../types/Libro.ts';
+import { Link } from 'react-router-dom';
 
 type CardProps={
     libro: Libro;
-    setLibro: React.Dispatch<React.SetStateAction<Libro>>;
-    setPagina: React.Dispatch<React.SetStateAction<number>>;
 }
 
-export function Card({libro, setLibro, setPagina}: CardProps){
+function Card({libro}: CardProps){
 
     return(
         <>
@@ -14,8 +14,10 @@ export function Card({libro, setLibro, setPagina}: CardProps){
           <img src={`https://covers.openlibrary.org/b/id/${libro.cover_i}-M.jpg`} alt="portada no disponible"></img>
           <h5>{libro.title}</h5>
           <p>{libro.author_name?.join(",")??"autor no disponible"}</p>
-          <button onClick={ ()=>(setPagina(4), setLibro(libro))}>Ver más</button>
+          <Link className='boton' to={`/Libro/${libro.cover_i}/${libro.title}/${libro.author_name?.join(",")}/${libro.key.split("/")[2]}`}>Ver Detalle</Link>
         </div>
         </>
       )
 }
+
+export default Card;

@@ -87,4 +87,5 @@ else {
     h1.innerHTML = "Habría que buscar algo...";
     resultados.appendChild(h1);
 }
+
 export {};

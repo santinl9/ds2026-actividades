@@ -1,19 +1,12 @@
 import '../App.css';
 import {useEffect, useState} from 'react';
-import type { Libro } from '../types/Libro.ts'; //Type no viene de Type={} sino de typescript
-import { Card } from '../components/LibroCard.tsx';
+import Card from '../components/LibroCard.tsx';
+import type {Libro} from '../types/Libro.ts'
 
-type IndiceProps= {
-    setPagina: React.Dispatch<React.SetStateAction<number>>;
-    setLibro: React.Dispatch<React.SetStateAction<Libro>>;
-}
+function Indice(){
 
-
-export function Indice({ setLibro, setPagina}: IndiceProps){
-
-    const[libros,setLibros] = useState<Libro[]>([]);
     const[cargando, setCargando] = useState<boolean>(false);
-
+    const[libros, setLibros] = useState<Libro[]>([]);
     useEffect(()=>{ //useEffect se ejecuta una vez que se renderiza toda la página, sirve para ejecutar operaciones en segundo plano
 
         async function librosTendencia_6(): Promise<Libro[]> {
@@ -47,12 +40,11 @@ export function Indice({ setLibro, setPagina}: IndiceProps){
     return(
 
         <>
-        <div className='cuerpo'>
             <div className='flex flex-col items-center bg-[url(../public/Mejai27s_Soulstealer_old.png)] bg-no-repeat bg-center h-[250px]' id="titulo_indice">
                 <h1>Bienvenido!</h1>
                 <h2>Librería FeedMejai</h2>
             </div>
-            <button className='w-screen' onClick={()=>setPagina(2)}>Visitar Catálogo</button>
+            <button className='w-screen'>Visitar Catálogo</button>
             <h1>Libros mejor valorados</h1>
             <div className='flex flex-row flex-wrap justify-center'>
             {
@@ -61,14 +53,13 @@ export function Indice({ setLibro, setPagina}: IndiceProps){
                     libros.map( (libro)=>( //Uso map porque tsx espera que el código entre llaves devuelva algo, MAP devuelve una nueva colección
                         <Card 
                             libro ={libro}
-                            setLibro={setLibro}
-                            setPagina={setPagina}
                         />
                     )) 
             }
             </div>
-        </div>
         </>
     )
 
 }
+
+export default Indice

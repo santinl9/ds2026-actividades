@@ -84,6 +84,7 @@ export function Indice({ setLibro, setPagina}: IndiceProps){
                         />
                     )) 
             }
+
             </div>
         </div>
         </>
