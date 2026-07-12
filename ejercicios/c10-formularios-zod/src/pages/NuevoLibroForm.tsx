@@ -1,7 +1,7 @@
 import '../App.css';
 import type { libroCargable } from "../types/LibroCargable";
 import { useNavigate } from "react-router-dom";
-import { libroCargableSchema, type LibroValidado } from '../types/schemas/libroCargableSchema';
+import { libroCargableSchema, type LibroValidado } from '../types/schemas/LibroCargableSchema';
 import {useForm} from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
