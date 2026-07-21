@@ -1,0 +1,57 @@
+@import "tailwindcss"; 
+@tailwindcss/forms;
+
+:root{
+    --blancos:antiquewhite;
+    --negros:#1a1a1a;
+}
+
+*{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    
+}
+
+.cuerpo{
+    background-image: url("../public/Old_Summoner27s_Rift_Shop.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: var(--negros); /*no pude hacer andar esto no sé por qué*/
+    color: var(--blancos);
+}
+
+#acerca_de{
+    background-color: var(--negros);
+}
+
+.header-footer{
+    background-color: var(--negros);
+    color: var(--blancos);
+}
+
+#carga_libro{
+    background-color: var(--negros);
+}
+
+button, .boton{
+    border-color: #DC3545;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 10px;
+    background-color: #1a1a1a9e;
+    &:hover{
+        background-color: #DC3545;
+    }
+}
+
+#titulo_indice{
+    font-size: 150%;
+    -webkit-text-stroke: 1px var(--negros);
+}
+
+input{
+    border: 2px solid #dc354685
+}
+
+.errores{
+    color:#DC3545
+}
