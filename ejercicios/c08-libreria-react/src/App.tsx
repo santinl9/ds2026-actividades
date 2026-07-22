@@ -1,4 +1,4 @@
-import './App.css';
+import './';
 import {useState} from 'react';
 import {Navbar } from './Navbar.tsx';
 import {Indice } from './Indice.tsx';

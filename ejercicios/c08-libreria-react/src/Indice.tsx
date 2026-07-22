@@ -1,4 +1,4 @@
-import './App.css';
+
 import {useEffect, useState} from 'react';
 import type { Libro } from './App.tsx'; //Type no viene de Type={} sino de typescript
 

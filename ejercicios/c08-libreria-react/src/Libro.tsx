@@ -1,4 +1,4 @@
-import './App.css';
+import './';
 import {useState, useEffect} from 'react';
 import type { Libro } from './App.tsx';
 
