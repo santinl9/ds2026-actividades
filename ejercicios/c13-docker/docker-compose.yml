@@ -1,0 +1,24 @@
+services:
+  #Cada servicio es un container distinto
+  api:
+    build: ./backend
+    ports:
+      - "3000:3000" 
+      #[valor arbitrario]:[donde escucha index.ts]
+      #como lo abro con 'docker compose' ya no tengo acceso directo a index.ts, por eso lo mapeo con el valor arbitrario
+    env_file: #pone a disposición del container las constantes del ".env"
+      - backend/.env
+    depends_on: #servicios que se deben ejecutar antes que 'api'
+      - db 
+  db: #para esta entrega (c13) todavía no hago nada con la base de datos, pero ya queda disponible
+    image: postgres:16-alpine
+    ports:
+      - "5432:5432"
+      #[valor arbitrario]:[hardcodeado, postgress:16-alpine escucha ahí]
+    env_file:
+      - backend/.env
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
