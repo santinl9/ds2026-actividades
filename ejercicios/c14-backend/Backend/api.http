@@ -1,0 +1,14 @@
+### Hello
+GET http://localhost:3000/
+
+### Listar libros
+GET http://localhost:3000/libros
+
+### Autores
+GET http://localhost:3000/autores
+
+### Libros disponibles
+GET http://localhost:3000/libros?disponible=true
+
+### Libros no disponibles
+GET http://localhost:3000/libros?disponible=false

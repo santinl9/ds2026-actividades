@@ -1,0 +1,36 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/forms";
+
+@layer components {
+
+  .fondo {
+    @apply min-h-screen w-full bg-[url('/Old_Summoner27s_Rift_Shop.jpg')] bg-cover bg-center bg-no-repeat
+           bg-[#1a1a1a] text-[antiquewhite] max-[420px]:bg-none max-[860px]:bg-right;
+  }
+
+  .titulo {
+    @apply flex flex-col items-center bg-[url('/Mejai27s_Soulstealer_old.png')] bg-no-repeat bg-center
+           h-[250px] text-[150%] [-webkit-text-stroke:2px_#1a1a1a];
+  }
+
+  .header-footer {
+    @apply bg-[#1a1a1a] text-[antiquewhite];
+  }
+
+  .boton {
+    @apply border-2 border-[#DC3545] rounded-[10px] bg-[#1a1a1a9e] hover:bg-[#DC3545] hover:text-[antiquewhite]
+           transition-colors text-[#DC3545] px-4 py-2;
+  }
+
+  .card {
+    @apply bg-[#1a1a1a] text-[antiquewhite] border border-[antiquewhite]/30 rounded-md;
+  }
+
+  .campo {
+    @apply bg-[#1a1a1a] text-[antiquewhite] border-1 border-[antiquewhite] rounded px-2 py-1;
+  }
+
+  .etiqueta {
+    @apply block mb-1 text-[antiquewhite] [-webkit-text-stroke:0.5px_#1a1a1a];
+  }
+}
