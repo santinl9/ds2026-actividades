@@ -1,0 +1,25 @@
+services:
+  api:
+    build: ./backend 
+    ports:
+      - "3000:3000" 
+    env_file: 
+      - backend/.env
+    depends_on: 
+      - db 
+    volumes: 
+      #lo mapea el contenedor sin necesidad de copiar (COPY ..)
+      - ./backend/src:/app/src
+      # [ruta local, arbitraria]:[ruta contenedor]
+        
+  db: #para esta entrega (c15) todavía no hago nada con la base de datos, pero ya queda disponible
+    image: postgres:16-alpine
+    ports:
+      - "5432:5432"
+    env_file:
+      - backend/.env
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
