@@ -1,0 +1,28 @@
+#es importante la identación
+services:
+  api:
+    build: ./Backend # busca el Dockerfile en ./Backend
+    ports: ["3000:3000", "5555:5555"] # 5555 es el puerto por defecto de Prisma Studio (localhost:5555)
+    env_file: 
+      - backend/.env 
+    depends_on:  
+     db: { condition: service_healthy} # 'api' no arranca hasta que 'db' arranca y pasa su "healtcheck"
+ 
+    volumes: #origen (local) : destino (contenedor)
+      - ./backend/src:/app/src 
+      - ./backend/prisma:/app/prisma
+      - ./backend/prisma.config.ts:/app/prisma.config.ts
+  db: 
+    image: postgres:16-alpine
+    ports:
+      - "5432:5432"
+    env_file:
+      - backend/.env
+    volumes:
+      - pgdata:/var/lib/postgresql/data #pgdata es un nombre arbitrario, se declara más abajo
+    healthcheck: #healthcheck mencionado arriba
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 5s
+      retries: 10
+volumes:
+  pgdata: #acá declaro que existe pgdata

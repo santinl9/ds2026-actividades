@@ -1,0 +1,52 @@
+generator client{
+    provider= "prisma-client"
+    output= "../src/generated/prisma"
+}
+
+datasource db{
+    provider= "postgresql"
+    url= env("DATABASE_URL")
+}
+
+//----------  **Libro**(0..*) --- (1)**Autor**
+//----------  **Libro**(0..*) --- (0..*)**Categoria**. No amerita LibroCategoria porque la relacion no tiene atributos propios
+
+model Libro { 
+  id           String      @id // OL*W
+  titulo       String
+  autor_id     String?   //define el campo en la base
+  autor        Autor?     @relation(fields: [autor_id], references: [id]) //"references: [id]" es el 'id' de Autor.
+    //no va en la base pero facilita el manejo en desarrollo
+  descripcion  String?
+  precio       Float
+  imagen_url   String
+  categorias   Categoria[]
+
+}
+
+model Autor { //  
+  id                String       @id // OL*A
+  nombre            String 
+  fecha_nacimiento  String?    
+  libros            Libro[] // si hubiese muchisimos libros asociados no me interesaría incluir el arreglo en el find
+    //Libro [] se carga por la propia la relación, no a mano.
+}
+
+
+model Categoria{ 
+  id               String       @id 
+  obras_asociadas  Int
+  libros           Libro[]
+
+}
+
+/*
+
+model LibroCategoria{
+  libro_id      Int
+  categoria_id  Int
+  libro         Libro     @relation(fields: [libro_id], references: [id])
+  categoria     Categoria @relation(fields: [categoria_id], references: [id])
+
+  @@id([libro_id, categoria_id])
+}*/
