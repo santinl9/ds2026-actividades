@@ -2,14 +2,14 @@ import type { Request, Response } from "express";
 import * as autorService from "../services/autor.service.js";
 import type { AutorCreate, AutorUpdate } from "../types/schemas/autor.schema.js";
 
-export function getAll(req: Request, res: Response) {
+export async function getAll(req: Request, res: Response) {
 
     const {libros} = req.query;
 
     if (libros == "true"){
-        res.json(autorService.findAll_libros()); 
+        res.json( await autorService.findAll_libros()); 
     }
-    res.json(autorService.findAll());
+    res.json( await autorService.findAll());
 }
 
 export async function getById(req: Request <{id: string}>, res: Response) {
@@ -45,9 +45,9 @@ export async function update(req: Request <{id: string}>, res: Response) {
 
 }
 
-export function remove(req: Request <{id: string}>, res: Response) {
+export async function remove(req: Request <{id: string}>, res: Response) {
 
-    const ok = autorService.remove(req.params.id);
+    const ok = await autorService.remove(req.params.id);
     if (!ok) return res.status(404).json({ error: "Autor no encontrado" });
     return res.status(204).send();
 

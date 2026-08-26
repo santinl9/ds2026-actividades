@@ -7,10 +7,10 @@ export async function getAll(req: Request, res: Response) {
     const {libros} = req.query;
 
     if (libros== "true"){
-        return res.json(categoriaService.findAll_libros())
+        return res.json(await categoriaService.findAll_libros())
     }
 
-    return res.json(categoriaService.findAll());
+    return res.json(await categoriaService.findAll());
 }
 
 export async function getById(req: Request<{id: string}>, res: Response) {
