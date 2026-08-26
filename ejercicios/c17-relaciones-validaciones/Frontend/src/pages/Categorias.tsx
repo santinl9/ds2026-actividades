@@ -3,7 +3,7 @@ import Card from "../components/LibroCard.bd"
 
 import { useGet } from "../hooks/useGet";
 
-function Guardado(){
+function Libros(){
 
     const {data: libros, loading: loading_bd, error: error_bd}= useGet<LibroXAutorXCategorias[]>(`http://localhost:3000/api/libros`);
 
@@ -45,4 +45,4 @@ function Guardado(){
     )
 }
 
-export default Guardado
+export default Libros

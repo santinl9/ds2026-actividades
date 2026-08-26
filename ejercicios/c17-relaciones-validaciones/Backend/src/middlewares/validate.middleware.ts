@@ -18,3 +18,15 @@ export const validate = (schema: ZodType) => {
         next() //si no le paso nada va al próximo middleware convencional (de 3 parámetros)
     }
 }
+
+export const validateParams=( schema: ZodType)=>{
+
+    return (req:Request, _res: Response, next: NextFunction)=>{
+
+        const resultado = schema.safeParse(req.params)
+
+        if ( !resultado.success) return next(resultado.error)
+
+        next()
+    }
+}

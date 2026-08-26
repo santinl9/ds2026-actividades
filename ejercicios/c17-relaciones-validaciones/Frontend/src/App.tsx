@@ -4,7 +4,8 @@ import Indice from './pages/Indice.tsx';
 import LibroDetalle from './pages/LibroDetalle.tsx';
 import Catalogo from './pages/Catalogo.tsx';
 import ContactoForm from './pages/Contacto.tsx';
-import Guardado from './pages/Guardado.tsx';
+import Libros from './pages/Libros.tsx';
+import Autores from './pages/Autores.tsx'
 
 function App(){
 
@@ -15,7 +16,8 @@ function App(){
                     <Route path='/Libro/:cover_i/:libro_key' element={<LibroDetalle/>}/>
                     <Route path='/' element={<Indice/>}/>
                     <Route path='/Catalogo' element ={<Catalogo/>} />
-                    <Route path='/Guardado' element={<Guardado/>} />
+                    <Route path='/Libros' element={<Libros/>} />
+                    <Route path= 'Autores' element={<Autores/>}/>
                     <Route path='/Contacto' element={<ContactoForm/>} />
                 </Routes>
             </Layout>
