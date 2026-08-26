@@ -1,27 +1,28 @@
-import type { LibroXAutorXCategorias } from "../types/bd/libro.bd";
-import Card from "../components/LibroCard.bd"
+import type { CategoriaBD } from "../types/bd/categoria.bd";
+
+import Card from "../components/CategoriaCard.bd"
 
 import { useGet } from "../hooks/useGet";
 
-function Libros(){
+function Categorias(){
 
-    const {data: libros, loading: loading_bd, error: error_bd}= useGet<LibroXAutorXCategorias[]>(`http://localhost:3000/api/libros`);
+    const {data: categorias, loading: loading_bd, error: error_bd}= useGet<CategoriaBD[]>(`http://localhost:3000/api/categorias`);
 
     return(
         <>
             <div className="fondo">
                 <div className="container mx-auto px-4">
                     <nav className="flex flex-col gap-4 rounded-lg p-4 shadow md:flex-row md:items-center md:justify-between header-footer">
-                        <h1 className="text-xl font-semibold">Libros Guardados</h1>
+                        <h1 className="text-xl font-semibold">Categorias Guardados</h1>
                     </nav>
                 </div>
 
                 {
-                    (libros)
+                    (categorias)
                     &&
                     <div className='flex flex-row flex-wrap justify-start gap-2'>{
-                        libros.map( (libro)=>( //Uso map porque tsx espera que el código entre llaves devuelva algo, MAP devuelve una nueva colección
-                            <Card {...libro}/>
+                        categorias.map( (categoria)=>( 
+                            <Card {...categoria}/>
                         ))
                     }
                     </div>
@@ -45,4 +46,4 @@ function Libros(){
     )
 }
 
-export default Libros
+export default Categorias

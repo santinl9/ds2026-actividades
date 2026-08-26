@@ -4,9 +4,9 @@ import Card from "../components/AutorCard.bd"
 
 import { useGet } from "../hooks/useGet";
 
-function Libros(){
+function Autores(){
 
-    const {data: autores, loading: loading_bd, error: error_bd}= useGet<AutorBD[]>(`http://localhost:3000/api/libros`);
+    const {data: autores, loading: loading_bd, error: error_bd}= useGet<AutorBD[]>(`http://localhost:3000/api/autores`);
 
     return(
         <>
@@ -21,7 +21,7 @@ function Libros(){
                     (autores)
                     &&
                     <div className='flex flex-row flex-wrap justify-start gap-2'>{
-                        autores.map( (autor)=>( //Uso map porque tsx espera que el código entre llaves devuelva algo, MAP devuelve una nueva colección
+                        autores.map( (autor)=>(
                             <Card {...autor}/>
                         ))
                     }
@@ -46,4 +46,4 @@ function Libros(){
     )
 }
 
-export default Libros
+export default Autores

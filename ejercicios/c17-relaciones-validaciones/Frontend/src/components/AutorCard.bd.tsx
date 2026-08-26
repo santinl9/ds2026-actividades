@@ -10,7 +10,7 @@ type CardProps = {
 
 function Card({id, nombre, fecha_nacimiento}: CardProps){
 
-    const  { data: data_bd, loading: loading_bd, error: error_bd, remove } = useDelete(`http://localhost:3000/api/libros/${id}`)
+    const  { data: data_bd, loading: loading_bd, error: error_bd, remove } = useDelete(`http://localhost:3000/api/autores/${id}`)
     const [elimnado, setEliminado] = useState<boolean>(false)
 
     useEffect( ()=>{
@@ -23,7 +23,7 @@ function Card({id, nombre, fecha_nacimiento}: CardProps){
         (elimnado==false)&&
             <div className="flex flex-col items-center gap-1 w-[210px] p-3 card">
                 <h5 className="text-center">{nombre}</h5>
-                <p className="text-center text-sm">{fecha_nacimiento}</p>
+                <p className="text-center text-sm">{(fecha_nacimiento)??"fecha no disponible"}</p>
                 
                 <button className="boton" onClick={()=>remove()}>
                 Eliminar

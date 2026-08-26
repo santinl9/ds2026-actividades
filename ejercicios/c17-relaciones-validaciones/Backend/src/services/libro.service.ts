@@ -30,26 +30,26 @@ export async function findAll(): Promise<LibroXAutorXCategorias[]> {
 
 export async function create(datos: LibroCreate): Promise<Libro> {
 
-    console.log("CATEGORIAS QUE LLEGAN:", datos.categorias);
+    //si no hay autor persistido con esa id, se guarda autor_id=null
+    let autor_id = datos.autor_id;
+    if (autor_id) {
+        const autorExiste = await prisma.autor.findUnique({ where: { id: autor_id } });
+        if (!autorExiste) autor_id = null;
+    }
 
-    const categorias = await prisma.categoria.findMany({
-        where: {
-            id: {
-                in: datos.categorias
-            }
-        },
-        select: {
-            id: true
-        }
-    });
-
-    console.log("CATEGORIAS ENCONTRADAS:", categorias);
+    //si no hay categorias persistidas con esas id, se guarda categorias=[] (o las que sí haya)
+    let categorias = datos.categorias
+    if (categorias.length>0){
+        const categorasExistentes= await prisma.categoria.findMany({ where: { id: { in: categorias } }}); 
+        categorias= categorasExistentes.map(categoria => categoria.id)
+    }
 
     return prisma.libro.create({
         data: {
             ...datos,
+            autor_id,
             categorias: {
-                connect: datos.categorias.map(id_categoria => ({ id: id_categoria })) //recibe id's (que valida zod) pero prisma resuelve conectándolo con las entidades.
+                connect: categorias.map(id_categoria => ({ id: id_categoria })) //recibe id's (que valida zod) pero prisma resuelve conectándolo con las entidades.
                     //connect espera: [{id:"valor_id"},...]. map hace esa transformación
             }
         },
