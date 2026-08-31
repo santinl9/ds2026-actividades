@@ -1,6 +1,6 @@
 @baseUrl = http://localhost:3000
 
-### Registro
+### Registro CLIENTE
 POST {{baseUrl}}/api/auth/registro
 Content-Type: application/json
 
