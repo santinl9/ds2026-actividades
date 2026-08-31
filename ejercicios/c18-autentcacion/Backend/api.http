@@ -1,0 +1,219 @@
+@baseUrl = http://localhost:3000
+
+### Registro
+POST {{baseUrl}}/api/auth/registro
+Content-Type: application/json
+
+{ "nombre": "Santino", "email": "santinomaya60@gmail.com", "password": "S47158702" }
+
+### Registro mail repetido
+POST {{baseUrl}}/api/auth/registro
+Content-Type: application/json
+
+{ "nombre": "Santipro", "email": "santinomaya60@gmail.com", "password": "S4715870211" }
+
+### Registro contraseña inválida 3 errores
+POST {{baseUrl}}/api/auth/registro
+Content-Type: application/json
+
+{ "nombre": "Santino", "email": "santinomaya60@gmail.com", "password": "corta" }
+
+### Login
+# @name login
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{ "email": "santinomaya60@gmail.com", "password": "S47158702" }
+
+### Login mail que no existe
+# @name login
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{ "email": "santinomaya67@gmail.com", "password": "S47158702" }
+
+### Guardar el token
+@token = {{login.response.body.token}}
+
+### Recuperar usuario propio
+GET {{baseUrl}}/api/auth/yo
+Authorization: Bearer {{token}}
+
+### Recuperar usuario propio sin token
+GET {{baseUrl}}/api/auth/yo
+
+### Listar libros
+GET {{baseUrl}}/api/libros
+Authorization: Bearer {{token}}
+
+### Un libro
+GET {{baseUrl}}/api/libros/OL17824318W
+Authorization: Bearer {{token}}
+
+### Un libro que no existe -> 404
+GET {{baseUrl}}/api/libros/999
+Authorization: Bearer {{token}}
+
+### Crear un libro
+POST {{baseUrl}}/api/libros
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "id": "OL778W",
+  "titulo": "Vegeta",
+  "autor_id": null,
+  "descripcion": "Vegeta es un libro genial",
+  "precio": 777.00,
+  "imagen_url": "https://covers.openlibrary.org/b/id/8294078-M.jpg",
+  "categorias":[]
+}
+
+### Crear un libro sin token
+POST {{baseUrl}}/api/libros
+Content-Type: application/json
+
+{
+  "id": "OL777W",
+  "titulo": "Vegeta",
+  "autor_id": null,
+  "descripcion": "Vegeta es un libro genial",
+  "precio": 777.00,
+  "imagen_url": "https://covers.openlibrary.org/b/id/8294078-M.jpg",
+  "categorias":[]
+}
+
+### Editar un libro
+PUT {{baseUrl}}/api/libros/OL777W
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "titulo": "Vegeta777"
+}
+
+### Editar un libro que no existe -> 404
+PUT {{baseUrl}}/api/libros/999
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "titulo": "Vegeta777"
+}
+
+### Borrar un libro
+DELETE {{baseUrl}}/api/libros/OL777W
+Authorization: Bearer {{token}}
+
+### Borrar el mismo libro de nuevo -> 404
+DELETE {{baseUrl}}/api/libros/OL777W
+Authorization: Bearer {{token}}
+
+### Listar autores
+GET {{baseUrl}}/api/autores
+Authorization: Bearer {{token}}
+
+### Listar autres y sus libros
+GET {{baseUrl}}/api/autores?libros=true
+Authorization: Bearer {{token}}
+
+### Un autor
+GET {{baseUrl}}/api/autores/OOL7115219A
+Authorization: Bearer {{token}}
+
+### Un autor y sus libros
+GET {{baseUrl}}/api/autores/OL7115219A?libros=true
+Authorization: Bearer {{token}}
+
+### Un autor que no existe -> 404
+GET {{baseUrl}}/api/autores/999
+Authorization: Bearer {{token}}
+
+### Crear un autor
+POST {{baseUrl}}/api/autores
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "id": "OL111A",
+    "nombre": "Santino",
+    "fecha_nacimiento": "11 de Marzo" 
+}
+
+### Editar un autor
+PUT {{baseUrl}}/api/autores/OL7115219A
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{ "nombre": "Sara J. Maas" }
+
+### Editar un autor que no existe -> 404
+PUT {{baseUrl}}/api/autores/999
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{ "nombre": "Sara J. Maas" }
+
+### Borrar un autor
+DELETE {{baseUrl}}/api/autores/OL111A
+Authorization: Bearer {{token}}
+
+### Borrar el mismo autor de nuevo -> 404
+DELETE {{baseUrl}}/api/autores/OL111A
+Authorization: Bearer {{token}}
+
+### Listar categorias
+GET {{baseUrl}}/api/categorias
+Authorization: Bearer {{token}}
+
+### Listar categorias y sus libros
+GET {{baseUrl}}/api/categorias?libros=true
+Authorization: Bearer {{token}}
+
+### Un categoria
+GET {{baseUrl}}/api/categorias/humor
+Authorization: Bearer {{token}}
+
+### Un categoria y sus libros
+GET {{baseUrl}}/api/categorias/humor?libros=true
+Authorization: Bearer {{token}}
+
+### Un categoria que no existe -> 404
+GET {{baseUrl}}/api/categorias/999
+Authorization: Bearer {{token}}
+
+### Crear un categoria
+POST {{baseUrl}}/api/categorias
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "id": "desarrollo",
+  "obras_asociadas": 1
+}
+
+### Editar un categoria
+PUT {{baseUrl}}/api/categorias/desarrollo
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "obras_asociadas": 2
+}
+
+### Editar un categoria que no existe -> 404
+PUT {{baseUrl}}/api/categorias/999
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "obras_asociadas": 2
+}
+
+### Borrar un categoria
+DELETE {{baseUrl}}/api/categorias/apartheid
+Authorization: Bearer {{token}}
+
+### Borrar el mismo categoria de nuevo -> 404
+DELETE {{baseUrl}}/api/categorias/apartheid
+Authorization: Bearer {{token}}
