@@ -1,0 +1,52 @@
+generator client{
+    provider= "prisma-client"
+    output= "../src/generated/prisma"
+}
+
+datasource db{
+    provider= "postgresql"
+    url= env("DATABASE_URL")
+}
+
+enum Rol {
+ ADMIN
+ CLIENTE
+}
+
+model Usuario {
+ id             Int @id @default(autoincrement())
+ email          String @unique 
+ passwordHash   String 
+ nombre         String
+ rol            Rol @default(CLIENTE) 
+ creadoEn       DateTime @default(now())
+}
+
+
+model Libro { 
+  id           String      @id // OL*W
+  titulo       String
+  autor_id     String?  
+  autor        Autor?     @relation(fields: [autor_id], references: [id])
+  descripcion  String?
+  precio       Float
+  imagen_url   String
+  categorias   Categoria[]
+
+}
+
+model Autor {  
+  id                String       @id // OL*A
+  nombre            String 
+  fecha_nacimiento  String?    
+  libros            Libro[]
+}
+
+
+model Categoria{ 
+  id               String       @id 
+  obras_asociadas  Int
+  libros           Libro[]
+
+}
+

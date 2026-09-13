@@ -1,0 +1,1 @@
+export type {Autor as AutorBD} from "../../../../Backend/src/types/Autor"

@@ -1,0 +1,1 @@
+export type {Categoria as CategoriaBD} from "../../../../Backend/src/types/Categoria"
