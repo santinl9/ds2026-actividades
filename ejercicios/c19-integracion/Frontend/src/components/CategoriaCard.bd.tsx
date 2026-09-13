@@ -8,7 +8,7 @@ type CardProps= {
 
 function Card({id: nombre, obras_asociadas}: CardProps){
 
-    const  { data: data_bd, loading: loading_bd, error: error_bd, remove } = useDelete(`http://localhost:3000/api/categorias/${nombre}`)
+    const  { data: data_bd, loading: loading_bd, error: error_bd, remove } = useDelete(`${import.meta.env.VITE_API_URL}/categorias/${nombre}`)
     const [elimnado, setEliminado] = useState<boolean>(false)
 
     useEffect( ()=>{

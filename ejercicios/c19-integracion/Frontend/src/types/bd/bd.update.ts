@@ -1,3 +1,17 @@
-export type {AutorUpdate} from '../../../../Backend/src/types/schemas/autor.schema'
-export type {CategoriaUpdate} from '../../../../Backend/src/types/schemas/categoria.schema'
-export type {LibroUpdate} from '../../../../Backend/src/types/schemas/libro.schema'
+export interface AutorUpdate {
+    nombre?: string;
+    fecha_nacimiento?: string | null;
+}
+
+export interface CategoriaUpdate {
+    obras_asociadas?: number;
+}
+
+export interface LibroUpdate {
+    titulo?: string;
+    autor_id?: string | null;
+    descripcion?: string | null;
+    precio?: number;
+    imagen_url?: string;
+    categorias?: string[];
+}

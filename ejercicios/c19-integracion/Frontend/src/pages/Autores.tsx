@@ -6,7 +6,7 @@ import { useGet } from "../hooks/useGet";
 
 function Autores(){
 
-    const {data: autores, loading: loading_bd, error: error_bd}= useGet<AutorBD[]>(`http://localhost:3000/api/autores`);
+    const {data: autores, loading: loading_bd, error: error_bd}= useGet<AutorBD[]>(`${import.meta.env.VITE_API_URL}/autores`);
 
     return(
         <>

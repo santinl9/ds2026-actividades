@@ -14,7 +14,7 @@ type AutorCardProps={
 function AutorCard({autor_key}: AutorCardProps){
 
     const {data: autor_api, loading: loading_api, error: error_api}= useGet<AutorAPI>(`https://openlibrary.org/authors/${autor_key}.json`);
-    const { data: data_bd, loading: loading_bd, error: error_bd, post } = usePost<AutorBD, AutorCreate>("http://localhost:3000/api/autores");
+    const { data: data_bd, loading: loading_bd, error: error_bd, post } = usePost<AutorBD, AutorCreate>(`${import.meta.env.VITE_API_URL}/autores`);
     
     if (loading_api) return (
         <div className="flex justify-center items-center h-40">
@@ -40,8 +40,8 @@ function AutorCard({autor_key}: AutorCardProps){
                 <button className='boton' onClick={()=>post(
                     {
                         id: autor_api.key.split("/")[2],
-                        nombre: autor_api.personal_name??autor_api.name,
-                        fecha_nacimiento: autor_api.birth_date?? null
+                        nombre: autor_api.personal_name ?? autor_api.name ?? "Desconocido",
+                        fecha_nacimiento: autor_api.birth_date ?? null
                     }
                 )}>
                 guardar

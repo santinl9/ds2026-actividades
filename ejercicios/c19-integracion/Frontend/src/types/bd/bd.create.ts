@@ -1,3 +1,20 @@
-export type {AutorCreate} from '../../../../Backend/src/types/schemas/autor.schema'
-export type {CategoriaCreate} from '../../../../Backend/src/types/schemas/categoria.schema'
-export type {LibroCreate} from '../../../../Backend/src/types/schemas/libro.schema'
+export interface AutorCreate {
+    id: string;
+    nombre: string;
+    fecha_nacimiento?: string | null;
+}
+
+export interface CategoriaCreate {
+    id: string;
+    obras_asociadas: number;
+}
+
+export interface LibroCreate {
+    id: string;
+    titulo: string;
+    autor_id?: string | null;
+    descripcion?: string | null;
+    precio: number;
+    imagen_url: string;
+    categorias: string[];
+}

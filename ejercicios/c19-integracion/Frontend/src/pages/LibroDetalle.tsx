@@ -30,9 +30,10 @@ function LibroDetalle(){
         libro_key:string
     }>()
 
-    const {data: libro_api, loading: loading_api, error: error_api}= useGet<LibroAPI>(`https://openlibrary.org/works/${libro_key.split("/")[2]}.json`);
+    const idObra = libro_key?.split("/")[2] ?? "";
+    const {data: libro_api, loading: loading_api, error: error_api}= useGet<LibroAPI>(idObra ? `https://openlibrary.org/works/${idObra}.json` : "");
 
-    const { data: data_bd, loading: loading_bd, error: error_bd, post } = usePost<LibroBD, LibroCreate>("http://localhost:3000/api/libros");
+    const { data: data_bd, loading: loading_bd, error: error_bd, post } = usePost<LibroBD, LibroCreate>(`${import.meta.env.VITE_API_URL}/libros`);
 
     const imagen_url= `https://covers.openlibrary.org/b/id/${cover_i}-M.jpg`
     const precio = (Math.random() * 5000).toFixed(2)
@@ -99,18 +100,21 @@ function LibroDetalle(){
                 <p>${precio}</p>
                 <button className="boton w-screen">Comprar</button>
                 <button className='boton' 
-                    onClick={()=> post (
-                        {
-                            id: libro_api.key.split("/")[2],
-                            titulo: libro_api.title,
-                            imagen_url: imagen_url,
-                            precio: Number(precio),
-                            categorias: libro_api.subjects?.slice(0,4),
-                            autor_id: libro_api.authors[0]?.author.key.split("/")[2],
-                            descripcion: descripcionParseada(libro_api.description)
+                    onClick={()=> {
+                        if (!libro_api) return;
+                        post(
+                            {
+                                id: libro_api.key.split("/")[2],
+                                titulo: libro_api.title,
+                                imagen_url: imagen_url,
+                                precio: Number(precio),
+                                categorias: libro_api.subjects?.slice(0,4) ?? [],
+                                autor_id: libro_api.authors?.[0]?.author?.key ? libro_api.authors[0].author.key.split("/")[2] : null,
+                                descripcion: descripcionParseada(libro_api.description)
 
-                        }
-                    )}>
+                            }
+                        );
+                    }}>
                     Guardar
                     {
                         (loading_bd)&&        

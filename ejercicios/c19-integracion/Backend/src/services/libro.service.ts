@@ -4,31 +4,22 @@ import { Prisma } from "../generated/prisma/client.js";
 import type { LibroCreate,LibroUpdate } from "../types/schemas/libro.schema.js";
 
 
-export async function findById(id: string): Promise<Libro | null> {
+export async function findById(id: string): Promise<LibroXAutorXCategorias | null> {
     return prisma.libro.findUnique({
         where: {id},
         include: {autor: true, categorias: true} // me trae el autor y las categorias asociadas.
     });
 }
 
-/*export async function findAll(disponible?: boolean): Promise<Libro[]> {
-    if (disponible === undefined) return prisma.libro.findMany();
-    return prisma.libro.findMany({
-        where: {disponible},
-        include: {autor:true} //en findMany(), "include{...}" compila pero se rompe
-    });
-}*/ 
-    //para que funcione:
 export type LibroXAutorXCategorias = Prisma.LibroGetPayload<{include: {autor: true, categorias:true}}>
 
 export async function findAll(): Promise<LibroXAutorXCategorias[]> {
     return prisma.libro.findMany({
         include: {autor:true, categorias: true}
     });
-    //en findMany() "include{...}" compila pero se rompe. Para que funcione:
 }
 
-export async function create(datos: LibroCreate): Promise<Libro> {
+export async function create(datos: LibroCreate): Promise<LibroXAutorXCategorias> {
 
     //si no hay autor persistido con esa id, se guarda autor_id=null
     let autor_id = datos.autor_id;
@@ -49,27 +40,27 @@ export async function create(datos: LibroCreate): Promise<Libro> {
             ...datos,
             autor_id,
             categorias: {
-                connect: categorias.map(id_categoria => ({ id: id_categoria })) //recibe id's (que valida zod) pero prisma resuelve conectándolo con las entidades.
-                    //connect espera: [{id:"valor_id"},...]. map hace esa transformación
+                connect: categorias.map(id_categoria => ({ id: id_categoria }))
             }
         },
+        include: { autor: true, categorias: true }
     });
 }
 
-export async function update(id: string, datos: LibroUpdate): Promise<Libro | null> {
+export async function update(id: string, datos: LibroUpdate): Promise<LibroXAutorXCategorias | null> {
     
     const existe = await prisma.libro.findUnique({where: {id}});
     if (!existe) return null;
-    await prisma.libro.update({
+    return prisma.libro.update({
         where: {id},
         data: {
             ...datos,
             categorias: {
-                set: datos.categorias?.map(id_categoria => ({ id: id_categoria })) //set reemplaza las relaciones actuales. Hace un conect internamente
+                set: datos.categorias?.map(id_categoria => ({ id: id_categoria }))
             }
-        }
+        },
+        include: { autor: true, categorias: true }
     });
-    return prisma.libro.findUnique({where: {id}});
 }
 
 export async function remove(id: string): Promise<boolean> {
