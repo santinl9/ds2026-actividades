@@ -12,7 +12,6 @@ function Header(){
             {location.pathname === '/' ? (<strong><Link to='/'>FeedMejai</Link></strong>) : (<Link to='/'>FeedMejai</Link>)}
             {location.pathname === '/Catalogo' ? (<strong><Link to='/Catalogo'>Catalogo</Link></strong>) : (<Link to='/Catalogo'>Catalogo</Link>)}
             {location.pathname === '/Libros' ? (<strong><Link to='/Libros'>Libros</Link></strong>) : (<Link to='/Libros'>Libros</Link>)}
-            {location.pathname === '/Libros/Nuevo' ? (<strong><Link to='/Libros/Nuevo'>+ Nuevo</Link></strong>) : (<Link to='/Libros/Nuevo'>+ Nuevo</Link>)}
             {location.pathname === '/Autores' ? (<strong><Link to='/Autores'>Autores</Link></strong>) : (<Link to='/Autores'>Autores</Link>)}
             {location.pathname === '/Categorias' ? (<strong><Link to='/Categorias'>Categorias</Link></strong>) : (<Link to='/Categorias'>Categorias</Link>)}
             {location.pathname === '/Contacto' ? (<strong><Link to='/Contacto'>Contacto</Link></strong>) : (<Link to='/Contacto'>Contacto</Link>)}

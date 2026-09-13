@@ -5,7 +5,6 @@ import LibroDetalle from './pages/LibroDetalle.tsx';
 import Catalogo from './pages/Catalogo.tsx';
 import ContactoForm from './pages/Contacto.tsx';
 import Libros from './pages/Libros.tsx';
-import LibroNuevo from './pages/LibroNuevo.tsx';
 import Autores from './pages/Autores.tsx';
 import Categorias from './pages/Categorias.tsx';
 import Login from './pages/Login.tsx';
@@ -20,7 +19,6 @@ function App(){
                     <Route path='/' element={<Indice/>}/>
                     <Route path='/Catalogo' element={<Catalogo/>} />
                     <Route path='/Libros' element={<Libros/>} />
-                    <Route path='/Libros/Nuevo' element={<LibroNuevo/>} />
                     <Route path='/Autores' element={<Autores/>}/>
                     <Route path='/Categorias' element={<Categorias/>}/>
                     <Route path='/Contacto' element={<ContactoForm/>} />
