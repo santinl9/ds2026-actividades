@@ -9,6 +9,7 @@ services:
       - ./Frontend/public:/app/public                                                                                                                                                  
       - ./Frontend/index.html:/app/index.html                                                                                                                                          
       - ./Frontend/vite.config.ts:/app/vite.config.ts
+      - ./Frontend/.env:/app/.env
     depends_on:
       - api
   api:

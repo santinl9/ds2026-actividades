@@ -5,7 +5,7 @@ import { useGet } from "../hooks/useGet";
 
 function Libros(){
 
-    const {data: libros, loading: loading_bd, error: error_bd}= useGet<LibroXAutorXCategorias[]>(`http://localhost:3000/api/libros`);
+    const {data: libros, loading: loading_bd, error: error_bd}= useGet<LibroXAutorXCategorias[]>(`${import.meta.env.VITE_API_URL}/libros`);
 
     return(
         <>

@@ -13,9 +13,11 @@ import cors from "cors";
 const app = express();
 const PORT = process.env.PORT;
 
-app.use(cors({
-    origin: "http://localhost:5173", // host del front
-}));
+const corsOptions = {
+    origin: [process.env.FRONTEND_URL ?? "http://localhost:5173"]
+};
+
+app.use(cors(corsOptions));
 
 app.use(express.json());
 
