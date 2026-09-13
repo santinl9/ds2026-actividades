@@ -1,32 +1,24 @@
 import { useState } from "react";
-import { parseErrorResponse } from "../functions/parseErrorResponse";
+import { apiFetch } from "../services/api";
 
 export function useDelete(url: string) {
-
-    const [data, setData] = useState<boolean>(false); //no hay body que parsear en un DELETE
+    const [data, setData] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
-    
 
     async function remove() {
         try {
-            setData(false)
+            setData(false);
             setLoading(true);
             setError(null);
-
-            const salida = await fetch(url, {
+            await apiFetch(url, {
                 method: "DELETE"
             });
-
-            if (!salida.ok){
-                throw new Error(await parseErrorResponse(salida));
-            }
-            setData(true)
-        }
-        catch (e) {
+            setData(true);
+            return true;
+        } catch (e) {
             setError(e instanceof Error ? e.message : "error desconocido");
-        }
-        finally {
+        } finally {
             setLoading(false);
         }
     }

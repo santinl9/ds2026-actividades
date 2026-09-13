@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { parseErrorResponse } from "../functions/parseErrorResponse";
+import { apiFetch } from "../services/api";
 
 export function usePut<T, B>(url: string) {
     const [data, setData] = useState<T | null>(null);
@@ -10,25 +10,15 @@ export function usePut<T, B>(url: string) {
         try {
             setLoading(true);
             setError(null);
-
-            const salida = await fetch(url, {
+            const res = await apiFetch<T>(url, {
                 method: "PUT",
-                headers: {
-                    "Content-Type": "application/json"
-                },
                 body: JSON.stringify(body)
             });
-
-            if (!salida.ok){
-                throw new Error(await parseErrorResponse(salida));
-            }
-
-            setData(await salida.json());
-        }
-        catch (e) {
+            setData(res);
+            return res;
+        } catch (e) {
             setError(e instanceof Error ? e.message : "error desconocido");
-        }
-        finally {
+        } finally {
             setLoading(false);
         }
     }

@@ -26,7 +26,11 @@ app.use("/api/libros", LibroRoutes);
 app.use("/api/autores", AutorRoutes);
 app.use("/api/categorias", CategoriaRoutes)
 
-app.use(errorHandler) 
+app.use((_req, res) => {
+    res.status(404).json({ error: "Ruta no encontrada" });
+});
+
+app.use(errorHandler); 
 
 app.listen(PORT, () => {
     console.log(`Servidor escuchando en http://localhost:${PORT}`);
