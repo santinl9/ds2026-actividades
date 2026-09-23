@@ -5,7 +5,8 @@ import { useGet } from "../hooks/useGet";
 
 function Libros(){
 
-    const {data: libros, loading: loading_bd, error: error_bd}= useGet<LibroXAutorXCategorias[]>(`${import.meta.env.VITE_API_URL}/libros`);
+    const {data: libros, loading: loading_bd, error: error_bd}= useGet<LibroXAutorXCategorias[]>(`/libros`);
+        //puede accederse a la propiedad '.env.VITE_API_URL' por que la interfaz se definió en "vite-env.d.ts" y se resuelve en tiempo de ejecución
 
     return(
         <>

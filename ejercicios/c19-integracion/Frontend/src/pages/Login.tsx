@@ -38,7 +38,7 @@ function Login() {
       const sesion = await apiFetch<SesionResponse>("/auth/login", {
         method: "POST",
         body: JSON.stringify(datos)
-      });
+      }); //¿por qué no usa usePost?
 
       guardarToken(sesion.token);
       setTokenActual(sesion.token);

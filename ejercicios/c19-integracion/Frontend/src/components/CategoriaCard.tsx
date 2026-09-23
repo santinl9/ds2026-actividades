@@ -13,7 +13,7 @@ function CategoriaCard({categoria_key}: CategoriaCardProps){
 
     const {data: categoria_api, loading: loading_api, error: error_api}= useGet<CategoriaAPI>(`https://openlibrary.org/subjects/${categoria_key}.json`);
 
-    const { data: data_bd, loading: loading_bd, error: error_bd, post } = usePost<CategoriaBD, CategoriaCreate>(`${import.meta.env.VITE_API_URL}/categorias`);
+    const { data: data_bd, loading: loading_bd, error: error_bd, post } = usePost<CategoriaBD, CategoriaCreate>(`/categorias`);
 
     
     if (loading_api) return (

@@ -14,7 +14,7 @@ type AutorCardProps={
 function AutorCard({autor_key}: AutorCardProps){
 
     const {data: autor_api, loading: loading_api, error: error_api}= useGet<AutorAPI>(`https://openlibrary.org/authors/${autor_key}.json`);
-    const { data: data_bd, loading: loading_bd, error: error_bd, post } = usePost<AutorBD, AutorCreate>(`${import.meta.env.VITE_API_URL}/autores`);
+    const { data: data_bd, loading: loading_bd, error: error_bd, post } = usePost<AutorBD, AutorCreate>(`/autores`);
     
     if (loading_api) return (
         <div className="flex justify-center items-center h-40">

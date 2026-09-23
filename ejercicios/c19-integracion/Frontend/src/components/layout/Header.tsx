@@ -20,9 +20,9 @@ function Header(){
                 <button
                     type="button"
                     onClick={() => { borrarToken(); window.location.reload(); }}
-                    className="ml-auto text-xs px-2 py-1 rounded bg-red-800 text-white hover:bg-red-700"
+                    className='boton ml-auto'
                 >
-                    Salir
+                    Cerrar Sesión
                 </button>
             )}
         </div>

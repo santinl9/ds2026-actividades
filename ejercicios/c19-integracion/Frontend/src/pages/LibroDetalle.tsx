@@ -33,7 +33,7 @@ function LibroDetalle(){
     const idObra = libro_key?.split("/")[2] ?? "";
     const {data: libro_api, loading: loading_api, error: error_api}= useGet<LibroAPI>(idObra ? `https://openlibrary.org/works/${idObra}.json` : "");
 
-    const { data: data_bd, loading: loading_bd, error: error_bd, post } = usePost<LibroBD, LibroCreate>(`${import.meta.env.VITE_API_URL}/libros`);
+    const { data: data_bd, loading: loading_bd, error: error_bd, post } = usePost<LibroBD, LibroCreate>(`/libros`);
 
     const imagen_url= `https://covers.openlibrary.org/b/id/${cover_i}-M.jpg`
     const precio = (Math.random() * 5000).toFixed(2)

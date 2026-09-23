@@ -6,7 +6,7 @@ import { useGet } from "../hooks/useGet";
 
 function Categorias(){
 
-    const {data: categorias, loading: loading_bd, error: error_bd}= useGet<CategoriaBD[]>(`${import.meta.env.VITE_API_URL}/categorias`);
+    const {data: categorias, loading: loading_bd, error: error_bd}= useGet<CategoriaBD[]>(`/categorias`);
 
     return(
         <>
