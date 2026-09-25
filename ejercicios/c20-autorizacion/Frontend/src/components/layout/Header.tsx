@@ -1,10 +1,19 @@
 import logo from '/Mejai27s_Soulstealer_old (1).png';
-import { Link, useLocation } from 'react-router-dom';
-import { obtenerToken, borrarToken } from '../../services/sesion';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 function Header(){
     const location = useLocation();
-    const token = obtenerToken();
+    const {usuario, logout} =useAuth();
+    const navigate = useNavigate();
+
+    const manejarSesion=()=>{
+        if (usuario){
+            logout();
+            navigate("/");
+        }
+        else navigate("/Login")
+    }
 
     return (
         <div className="flex flex-row items-center gap-4 h-[70px] px-4 header-footer flex-wrap">
@@ -15,16 +24,14 @@ function Header(){
             {location.pathname === '/Autores' ? (<strong><Link to='/Autores'>Autores</Link></strong>) : (<Link to='/Autores'>Autores</Link>)}
             {location.pathname === '/Categorias' ? (<strong><Link to='/Categorias'>Categorias</Link></strong>) : (<Link to='/Categorias'>Categorias</Link>)}
             {location.pathname === '/Contacto' ? (<strong><Link to='/Contacto'>Contacto</Link></strong>) : (<Link to='/Contacto'>Contacto</Link>)}
-            {location.pathname === '/Login' ? (<strong><Link to='/Login'>Login</Link></strong>) : (<Link to='/Login'>Login</Link>)}
-            {token && (
-                <button
-                    type="button"
-                    onClick={() => { borrarToken(); window.location.reload(); }}
-                    className='boton ml-auto'
-                >
-                    Cerrar Sesión
-                </button>
-            )}
+            {!usuario && (location.pathname === '/Login' ? (<strong><Link to='/Login'>Login</Link></strong>) : (<Link to='/Login'>Login</Link>))}
+            
+            <div className='ml-auto'>
+            {usuario && <span>Hola, {usuario.nombre} </span>}
+            <button className="boton ml-auto" onClick={manejarSesion}>
+                {usuario ? 'Salir' : 'Ingresar'}
+            </button>
+            </div>
         </div>
     );
 }

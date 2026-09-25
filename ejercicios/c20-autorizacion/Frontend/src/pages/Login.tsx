@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { loginSchema, type LoginValidado } from "../types/schemas/loginSchema";
 import { apiFetch } from "../services/api";
 import { guardarToken, obtenerToken, borrarToken } from "../services/sesion";
+import { useAuth } from "../components/context/AuthContext";
 
 interface SesionResponse {
   token: string;
@@ -29,6 +30,7 @@ function Login() {
   const [loading, setLoading] = useState<boolean>(false);
   const [errorServidor, setErrorServidor] = useState<string | null>(null);
   const [tokenActual, setTokenActual] = useState<string | null>(obtenerToken());
+  const { login } = useAuth();
 
   async function onSubmit(datos: LoginValidado) {
     try {
@@ -42,7 +44,10 @@ function Login() {
 
       guardarToken(sesion.token);
       setTokenActual(sesion.token);
+
+      await login(datos); //me setea el contexto
       navigate("/");
+
     } catch (err) {
       setErrorServidor(err instanceof Error ? err.message : "Error al iniciar sesión");
     } finally {
