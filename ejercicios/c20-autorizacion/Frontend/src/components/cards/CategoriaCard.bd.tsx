@@ -1,4 +1,4 @@
-import { useDelete } from "../hooks/useDelete";
+import { useDelete } from "../../hooks/useDelete";
 import { useState, useEffect } from "react";
 
 type CardProps= {

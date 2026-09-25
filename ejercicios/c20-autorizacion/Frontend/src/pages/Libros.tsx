@@ -1,5 +1,5 @@
 import type { LibroXAutorXCategorias } from "../types/bd/libro.bd";
-import Card from "../components/LibroCard.bd"
+import Card from "../components/cards/LibroCard.bd"
 
 import { useGet } from "../hooks/useGet";
 

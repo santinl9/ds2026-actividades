@@ -6,8 +6,8 @@ import type { Libro as LibroAPI } from '../types/Libro'
 import type { LibroCreate } from '../types/bd/bd.create';
 import type { LibroBD } from '../types/bd/libro.bd';
 
-import AutorCard from '../components/AutorCard'
-import CategoriaCard from '../components/CategoriaCard'
+import AutorCard from '../components/cards/AutorCard'
+import CategoriaCard from '../components/cards/CategoriaCard'
 
 
 

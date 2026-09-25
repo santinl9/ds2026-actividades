@@ -1,9 +1,9 @@
-import type {Autor as AutorAPI} from '../types/Autor.ts';
-import type { AutorBD } from '../types/bd/autor.bd.ts';
-import type { AutorCreate } from '../types/bd/bd.create.ts';
+import type {Autor as AutorAPI} from '../../types/Autor.ts';
+import type { AutorBD } from '../../types/bd/autor.bd.ts';
+import type { AutorCreate } from '../../types/bd/bd.create.ts';
 
-import { useGet } from '../hooks/useGet.ts';
-import { usePost } from '../hooks/usePost.ts';
+import { useGet } from '../../hooks/useGet.ts';
+import { usePost } from '../../hooks/usePost.ts';
 
 
 

@@ -1,9 +1,9 @@
-import type {Categoria as CategoriaAPI} from '../types/Categoria.ts';
-import type { CategoriaBD } from '../types/bd/categoria.bd.ts';
-import type { CategoriaCreate } from '../types/bd/bd.create.ts';
+import type {Categoria as CategoriaAPI} from '../../types/Categoria.ts';
+import type { CategoriaBD } from '../../types/bd/categoria.bd.ts';
+import type { CategoriaCreate } from '../../types/bd/bd.create.ts';
 
-import { useGet } from '../hooks/useGet.ts';
-import { usePost } from '../hooks/usePost.ts';
+import { useGet } from '../../hooks/useGet.ts';
+import { usePost } from '../../hooks/usePost.ts';
 
 type CategoriaCardProps={
     categoria_key:string

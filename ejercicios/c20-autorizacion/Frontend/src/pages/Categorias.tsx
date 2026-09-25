@@ -1,6 +1,6 @@
 import type { CategoriaBD } from "../types/bd/categoria.bd";
 
-import Card from "../components/CategoriaCard.bd"
+import Card from "../components/cards/CategoriaCard.bd"
 
 import { useGet } from "../hooks/useGet";
 
