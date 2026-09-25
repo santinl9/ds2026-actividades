@@ -8,23 +8,26 @@ import Libros from './pages/Libros.tsx';
 import Autores from './pages/Autores.tsx';
 import Categorias from './pages/Categorias.tsx';
 import Login from './pages/Login.tsx';
+import { AuthProvider } from './components/context/AuthContext.tsx';
 
 function App(){
 
     return (
         <>
-            <Layout>
-                <Routes>
-                    <Route path='/Libro/:cover_i/:libro_key' element={<LibroDetalle/>}/>
-                    <Route path='/' element={<Indice/>}/>
-                    <Route path='/Catalogo' element={<Catalogo/>} />
-                    <Route path='/Libros' element={<Libros/>} />
-                    <Route path='/Autores' element={<Autores/>}/>
-                    <Route path='/Categorias' element={<Categorias/>}/>
-                    <Route path='/Contacto' element={<ContactoForm/>} />
-                    <Route path='/Login' element={<Login/>} />
-                </Routes>
-            </Layout>
+            <AuthProvider>
+                <Layout>
+                    <Routes>
+                        <Route path='/Libro/:cover_i/:libro_key' element={<LibroDetalle/>}/>
+                        <Route path='/' element={<Indice/>}/>
+                        <Route path='/Catalogo' element={<Catalogo/>} />
+                        <Route path='/Libros' element={<Libros/>} />
+                        <Route path='/Autores' element={<Autores/>}/>
+                        <Route path='/Categorias' element={<Categorias/>}/>
+                        <Route path='/Contacto' element={<ContactoForm/>} />
+                        <Route path='/Login' element={<Login/>} />
+                    </Routes>
+                </Layout>
+            </AuthProvider>
         </>
     );
 }
