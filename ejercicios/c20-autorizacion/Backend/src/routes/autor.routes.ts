@@ -11,8 +11,8 @@ const router = Router();
 
 router.get("/",         autorController.getAll);    // /autores/id?libros==true
 router.get("/:id",      validateParams(ParamSchema),                                                        autorController.getById);   // /autores/id?libros==true
-router.post("/",        authenticate,   authorize("ADMIN"),   validate(AutorCreateSchema),                                autorController.create);
-router.put("/:id",      authenticate,   authorize("ADMIN"),   validateParams(ParamSchema), validate(AutorUpdateSchema),   autorController.update);
+router.post("/",        authenticate,   authorize("CLIENTE"),   validate(AutorCreateSchema),                                autorController.create);
+router.put("/:id",      authenticate,   authorize("CLIENTE"),   validateParams(ParamSchema), validate(AutorUpdateSchema),   autorController.update);
 router.delete("/:id",   authenticate,   authorize("ADMIN"),     validateParams(ParamSchema),                                autorController.remove);
 
 export default router;

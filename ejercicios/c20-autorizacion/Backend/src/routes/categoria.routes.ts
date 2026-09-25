@@ -12,8 +12,8 @@ const router = Router();
 
 router.get("/",         categoriaController.getAll);    // /categorias?libros==true
 router.get("/:id",      validateParams(ParamSchema),                                    categoriaController.getById);   // /categorias/id?libros==true
-router.post("/",        authenticate,   authorize("ADMIN"),     validate(CategoriaCreateSchema),                                categoriaController.create);
-router.put("/:id",      authenticate,   authorize("ADMIN"),     validateParams(ParamSchema), validate(CategoriaUpdateSchema),   categoriaController.update);
+router.post("/",        authenticate,   authorize("CLIENTE"),     validate(CategoriaCreateSchema),                                categoriaController.create);
+router.put("/:id",      authenticate,   authorize("CLIENTE"),     validateParams(ParamSchema), validate(CategoriaUpdateSchema),   categoriaController.update);
 router.delete("/:id",   authenticate,   authorize("ADMIN"),     validateParams(ParamSchema),                                    categoriaController.remove);
 
 export default router;

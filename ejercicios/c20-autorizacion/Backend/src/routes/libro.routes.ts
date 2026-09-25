@@ -12,9 +12,9 @@ import { ParamSchema } from "../types/schemas/param.schema.js";
 const router = Router();
 
 router.get("/",         libroController.getAll);
-router.get("/:id",      validateParams(ParamSchema),                                    libroController.getById);
-router.post("/",        authenticate,   authorize("ADMIN"),     validate(LibroCreateSchema),                                    libroController.create);
-router.put("/:id",      authenticate,   authorize("ADMIN"),     validateParams(ParamSchema), validate(LibroUpdateSchema),       libroController.update);
-router.delete("/:id",   authenticate,   authorize("ADMIN"),     validateParams(ParamSchema),                                    libroController.remove);
+router.get("/:id",      validateParams(ParamSchema),                                                                             libroController.getById);
+router.post("/",        authenticate,   authorize("CLIENTE"),     validate(LibroCreateSchema),                                   libroController.create);
+router.put("/:id",      authenticate,   authorize("CLIENTE"),     validateParams(ParamSchema), validate(LibroUpdateSchema),      libroController.update);
+router.delete("/:id",   authenticate,   authorize("ADMIN"),     validateParams(ParamSchema),                                     libroController.remove);
 
 export default router;
