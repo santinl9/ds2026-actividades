@@ -4,7 +4,7 @@ import { useAuth } from '../context/AuthContext';
 
 function Header(){
     const location = useLocation();
-    const {usuario, logout} =useAuth();
+    const {usuario, logout, tieneRol} =useAuth();
     const navigate = useNavigate();
 
     const manejarSesion=()=>{
@@ -24,7 +24,7 @@ function Header(){
             {location.pathname === '/Autores' ? (<strong><Link to='/Autores'>Autores</Link></strong>) : (<Link to='/Autores'>Autores</Link>)}
             {location.pathname === '/Categorias' ? (<strong><Link to='/Categorias'>Categorias</Link></strong>) : (<Link to='/Categorias'>Categorias</Link>)}
             {location.pathname === '/Contacto' ? (<strong><Link to='/Contacto'>Contacto</Link></strong>) : (<Link to='/Contacto'>Contacto</Link>)}
-            {location.pathname === '/Solo-Admin' ? (<strong><Link to='/Solo-Admin'>Solo Admin</Link></strong>) : (<Link to='/Solo-Admin'>Solo Admin</Link>)}
+            {(tieneRol("ADMIN")) && (location.pathname === '/Solo-Admin' ? (<strong><Link to='/Solo-Admin'>Solo Admin</Link></strong>) : (<Link to='/Solo-Admin'>Solo Admin</Link>))}
             {!usuario && (location.pathname === '/Login' ? (<strong><Link to='/Login'>Login</Link></strong>) : (<Link to='/Login'>Login</Link>))}
             
             <div className='ml-auto'>
