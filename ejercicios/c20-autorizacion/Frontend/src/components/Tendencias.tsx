@@ -1,4 +1,4 @@
-import Card from './LibroCard.tsx';
+import Card from './cards/LibroCard.tsx';
 import type {LibroBuscado} from '../types/LibroBuscado.ts'
 import { useGet } from '../hooks/useGet.ts';
 

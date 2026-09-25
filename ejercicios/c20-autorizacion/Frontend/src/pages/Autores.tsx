@@ -1,6 +1,6 @@
 import type { AutorBD } from "../types/bd/autor.bd";
 
-import Card from "../components/AutorCard.bd"
+import Card from "../components/cards/AutorCard.bd"
 
 import { useGet } from "../hooks/useGet";
 

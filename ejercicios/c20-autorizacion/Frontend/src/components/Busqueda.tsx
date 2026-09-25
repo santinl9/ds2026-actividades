@@ -1,4 +1,4 @@
-import LibroCard from './LibroCard.tsx';
+import LibroCard from './cards/LibroCard.tsx';
 import type {LibroBuscado} from '../types/LibroBuscado.ts';
 import { useGet } from '../hooks/useGet.ts';
 
