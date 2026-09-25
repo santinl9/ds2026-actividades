@@ -1,0 +1,11 @@
+node_modules
+dist
+.env
+consideraciones.md
+/Backend/consideraciones.md
+/Backend/src/controllers/codigos-error.md
+.codebase-memory
+ACTIVIDAD.md
+COMPROBACION.md
+CONTEXTO.md
+LOG.md

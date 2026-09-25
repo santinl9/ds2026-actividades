@@ -1,0 +1,40 @@
+#es importante la identación
+services:
+  front:
+    build: ./Frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./Frontend/src:/app/src                                                                                                                                                        
+      - ./Frontend/public:/app/public                                                                                                                                                  
+      - ./Frontend/index.html:/app/index.html                                                                                                                                          
+      - ./Frontend/vite.config.ts:/app/vite.config.ts
+      - ./Frontend/.env:/app/.env
+    depends_on:
+      - api
+  api:
+    build: ./Backend 
+    ports: ["3000:3000", "5555:5555"] 
+    env_file: 
+      - backend/.env 
+    depends_on:  
+     db: { condition: service_healthy} 
+ 
+    volumes: 
+      - ./backend/src:/app/src 
+      - ./backend/prisma:/app/prisma
+      - ./backend/prisma.config.ts:/app/prisma.config.ts
+  db: 
+    image: postgres:16-alpine
+    ports:
+      - "5432:5432"
+    env_file:
+      - backend/.env
+    volumes:
+      - pgdata:/var/lib/postgresql/data 
+    healthcheck: 
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 5s
+      retries: 10
+volumes:
+  pgdata:
