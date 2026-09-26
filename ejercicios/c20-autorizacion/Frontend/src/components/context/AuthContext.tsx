@@ -53,13 +53,6 @@ export function AuthProvider({ children }: { children: ReactNode }){
         setUsuario(data.usuario);
     };
 
-    // // checkea sesión expirada
-    useEffect(() => {
-        window.addEventListener('sesion-expirada', logout);
-        return () => window.removeEventListener('sesion-expirada', logout);
-    }, []);
-
-
   return (
     <AuthContext.Provider value={{ 
         usuario, 
