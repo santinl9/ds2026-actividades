@@ -22,11 +22,13 @@ export function AuthProvider({ children }: { children: ReactNode }){
     const [cargando, setCargando] = useState(obtenerToken() !== null);
 
     useEffect(() => {
-    if (!obtenerToken()) return;    // sin token no hay nada que averiguar
-    apiFetch<Usuario>('/auth/yo')
-        .then(setUsuario)
-        .catch(() => borrarToken())  // vencido o inválido: se limpia
-        .finally(() => setCargando(false));
+      if (!obtenerToken()) return;    // sin token no hay nada que averiguar
+      apiFetch<Usuario>('/auth/yo')
+          .then(setUsuario)
+          .catch(() => borrarToken())  // vencido o inválido: se limpia
+          .finally(() => setCargando(false));
+      window.addEventListener('sesion-expirada', logout);
+      return () => window.removeEventListener('sesion-expirada', logout)
     }, []);
 
     const logout = () => {
