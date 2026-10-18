@@ -1,0 +1,15 @@
+FROM node:22-alpine                                                                                                                                                                    
+                                                                                                                                                                                           
+WORKDIR /app                                                                                                                                                                           
+                                                                                                                                                                                                                                                                                                                                         
+    COPY package*.json ./                                                                                                                                                                  
+                                                                                                                                                                                        
+    RUN npm install                                                                                                                                                                        
+                                                                                                                                                                                                                                                                                                                                                 
+    COPY . .                                                                                                                                                                               
+                                                                                                                                                                                        
+    EXPOSE 5173                                                                                                                                                                            
+                                                                                                                                                                                        
+    # El parámetro '-- --host' es fundamental para que Vite escuche en 0.0.0.0 y no solo en localhost interno del contenedor                                                               
+    CMD ["npm", "run", "dev", "--", "--host"]                                                                                                                                              
+                                       
